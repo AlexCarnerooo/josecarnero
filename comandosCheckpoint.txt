@@ -1,0 +1,15 @@
+# Ver estado de los archivos
+git status
+
+# Guardar checkpoint
+git add .
+git commit -m "Descripción del cambio"
+
+# Ver historial de checkpoints
+git log
+
+# Volver a un checkpoint anterior
+git checkout ID_DEL_COMMIT
+
+# Volver a la última versión
+git checkout master
