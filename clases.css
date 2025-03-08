@@ -1,0 +1,172 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    color: white;
+}
+
+/* Navegación */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    margin: 0 auto;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icons img {
+    width: 32px;
+    height: 32px;
+}
+
+/* Mantener los estilos específicos de la página de clases */
+.schedule {
+    padding: 2rem 4rem; /* Mismo padding que el nav */
+}
+
+.schedule-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.schedule-content {
+    flex: 0 1 50%;
+    position: relative;
+}
+
+.schedule h1 {
+    font-size: 4rem;
+    margin-bottom: 3rem;
+}
+
+.schedule-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.day-schedule {
+    margin-bottom: 2rem;
+}
+
+.day-schedule h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.location h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.location p {
+    margin: 0.3rem 0;
+}
+
+/* Estilos de la imagen */
+.schedule-image {
+    flex: 0 0 40%;
+    height: 80vh;
+    position: sticky;
+    top: 2rem;
+    margin-top: 7rem; /* Este margen alinea la imagen con el inicio del cronograma */
+}
+
+.schedule-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contact-link {
+    color: white;
+    text-decoration: underline;
+}
+
+.book-link {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: white;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.book-link:hover {
+    color: #cccccc;
+}
+
+/* Diseño responsivo */
+@media (max-width: 1024px) {
+    .schedule-container {
+        flex-direction: column;
+    }
+
+    .schedule-content {
+        flex: 1 1 100%;
+    }
+
+    .schedule-image {
+        flex: 1 1 100%;
+        position: static;
+        margin-top: 2rem;
+    }
+
+    .schedule h1 {
+        font-size: 3rem;
+    }
+}
+
+.location-map {
+    margin-top: 4rem;
+    width: 100%;
+}
+
+.location-link {
+    margin-top: 4rem;
+}
+
+.map-link {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border: 1px solid white;
+    padding: 1rem 2rem;
+    transition: all 0.3s ease;
+}
+
+.map-link:hover {
+    background: white;
+    color: black;
+}

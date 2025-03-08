@@ -1,0 +1,282 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    background-color: black;
+}
+
+.hero {
+    height: 100vh;
+    background-image: url('Fotos/foto_fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 2rem;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo semi-transparente */
+    backdrop-filter: blur(5px); /* Efecto de desenfoque */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Línea divisoria sutil */
+}
+
+.logo a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    margin: 0 auto;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icons img {
+    width: 32px;
+    height: 32px;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+.cta button {
+    background: none;
+    border: 1px solid white;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cta button:hover {
+    background: white;
+    color: black;
+}
+
+.about {
+    padding: 80px 20px;
+    background-color: #1a1a1a;  /* Mantenemos el fondo oscuro */
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.about-image {
+    flex: 1;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: white;  /* Texto blanco para mantener el tema */
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: white;  /* Texto blanco para mantener el tema */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .about-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .about-text h2 {
+        font-size: 2rem;
+    }
+}
+
+footer {
+    background-color: black;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem 0;
+    margin-top: 0;
+    width: 100%;
+    position: relative;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.legal-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.legal-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.legal-links a:hover {
+    opacity: 1;
+}
+
+.copyright {
+    color: white;
+    font-size: 0.9rem;
+    opacity: 0.6;
+}
+
+/* Estilos para todas las páginas que no son la principal */
+body > main {
+    margin-top: 100px; /* Espacio para la navegación fija */
+    padding: 2rem 4rem;
+}
+
+.schedule {
+    padding-top: 80px; /* Reducido de 100px a 80px */
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
+/* Estilos específicos para la página de clases */
+main.schedule {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+main.schedule h1 {
+    font-size: 5rem;
+    margin: 0;
+    padding: 2rem 4rem;
+}
+
+.schedule-content {
+    display: flex;
+}
+
+.schedule-text {
+    flex: 1;
+    padding: 0 4rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.schedule-times {
+    margin-bottom: auto; /* Empuja la ubicación hacia abajo */
+}
+
+.schedule-text h2 {
+    font-size: 2.5rem;
+    margin: 2rem 0 1rem 0;
+}
+
+.schedule-text p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+.schedule-image {
+    width: 45%; /* Un poco más estrecha que antes */
+    height: 100vh; /* Altura completa de la ventana */
+    object-fit: cover; /* Volvemos a cover para mantener el aspecto */
+}
+
+.location {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.location a {
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.location a:hover {
+    opacity: 0.8;
+}
+
+.maps-button {
+    display: inline-block;
+    background: none;
+    border: 1px solid white;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    margin-top: 1rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.maps-button:hover {
+    background: white;
+    color: black;
+}
+
+/* Ajustes de espaciado */
+h2 {
+    font-size: 2.5rem;
+    margin: 2rem 0 1rem 0;
+}
+
+h2:first-of-type {
+    margin-top: 0;
+}
+
