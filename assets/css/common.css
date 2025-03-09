@@ -1,33 +1,22 @@
-body {
+/* Estilos generales */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     font-family: Arial, sans-serif;
+    background-color: black;
     color: white;
 }
 
-.hero {
-    height: 100vh;
-    background-image: url('Fotos/fondo.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 0 2rem;
-}
-
+/* Navegación */
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
 }
 
 .logo a {
@@ -57,33 +46,13 @@ nav {
     height: 32px;
 }
 
-h1 {
-    font-size: 3rem;
-    margin-bottom: 2rem;
-}
-
-.cta button {
-    background: none;
-    border: 1px solid white;
-    color: white;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.cta button:hover {
-    background: white;
-    color: black;
-}
-
+/* Estilos del Footer */
 footer {
     background-color: black;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding: 2rem 0;
-    margin-top: 4rem;
+    margin-top: 2rem;
     width: 100%;
-    position: relative;
 }
 
 .footer-content {
