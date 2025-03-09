@@ -1,0 +1,223 @@
+/* Estilos para la página About */
+.about {
+    padding-top: 80px;
+    min-height: 100vh;
+    background-color: black;
+}
+
+.about-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.about-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 4rem;
+    margin-bottom: 6rem;
+}
+
+.about-text {
+    flex: 1;
+    max-width: 55%;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: normal;
+    color: white;
+}
+
+.text-section {
+    margin-bottom: 2rem;
+}
+
+.text-section p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.text-section em {
+    font-style: italic;
+}
+
+.about-image {
+    width: 500px;
+    height: 300px;
+    object-fit: cover;
+    margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .about-section {
+        gap: 3rem;
+    }
+
+    .about-image {
+        width: 400px;
+        height: 240px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .about-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    .about-text {
+        max-width: 100%;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .about-image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16/9;
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        padding: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .text-section p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Footer */
+footer {
+    background-color: black;
+    padding: 2rem 0;
+    margin-top: 2rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.legal-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.legal-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.legal-links a:hover {
+    opacity: 1;
+}
+
+.copyright {
+    color: white;
+    font-size: 0.9rem;
+    opacity: 0.6;
+}
+
+/* Sección de experiencia o certificaciones si las necesitas */
+.certifications {
+    padding: 4rem;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.certifications-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.certifications h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Diseño responsivo */
+@media (max-width: 1024px) {
+    .about-container {
+        gap: 3rem;
+    }
+    
+    .about-text h1 {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-hero {
+        padding: 4rem 2rem 2rem;
+    }
+
+    .about-container {
+        flex-direction: column;
+    }
+
+    .about-text h1 {
+        font-size: 2.5rem;
+    }
+
+    .certifications {
+        padding: 2rem;
+    }
+}
+
+/* Navegación */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.quote-section {
+    text-align: center;
+    margin: 6rem auto 3rem;
+    max-width: 800px;
+    padding: 0 2rem;
+}
+
+.quote {
+    font-size: 1.5rem;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.quote-author {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+} 

@@ -17,6 +17,12 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .logo a {
@@ -48,7 +54,10 @@ nav {
 
 /* Mantener los estilos específicos de la página de clases */
 .schedule {
-    padding: 2rem 4rem; /* Mismo padding que el nav */
+    padding-top: 80px;
+    color: white;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .schedule-container {
@@ -60,28 +69,66 @@ nav {
 }
 
 .schedule-content {
-    flex: 0 1 50%;
-    position: relative;
-}
-
-.schedule h1 {
-    font-size: 4rem;
-    margin-bottom: 3rem;
-}
-
-.schedule-grid {
     display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    justify-content: space-between;
 }
 
-.day-schedule {
+.schedule-text {
+    flex: 1;
+    padding: 2rem 2rem;
+    max-width: 55%;
+}
+
+.main-title {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.schedule-days {
+    margin-top: 1.5rem;
+}
+
+.day-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 2.5rem 0 0.8rem;
+    color: white;
+}
+
+/* Ajuste específico para los días después del primero */
+.day-title:not(:first-of-type) {
+    margin-top: 3.5rem;
+}
+
+.class-info {
     margin-bottom: 2rem;
 }
 
-.day-schedule h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+.class-type {
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+.class-time {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.location {
+    margin-top: 2rem;
+}
+
+.location-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+}
+
+.location-address {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .location h3 {
@@ -91,21 +138,6 @@ nav {
 
 .location p {
     margin: 0.3rem 0;
-}
-
-/* Estilos de la imagen */
-.schedule-image {
-    flex: 0 0 40%;
-    height: 80vh;
-    position: sticky;
-    top: 2rem;
-    margin-top: 7rem; /* Este margen alinea la imagen con el inicio del cronograma */
-}
-
-.schedule-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 .contact-link {
@@ -142,8 +174,35 @@ nav {
         margin-top: 2rem;
     }
 
-    .schedule h1 {
+    .main-title {
         font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .schedule-content {
+        flex-direction: column;
+    }
+
+    .schedule-text {
+        max-width: 100%;
+        padding: 1.5rem;
+    }
+
+    .main-title {
+        font-size: 3rem;
+    }
+
+    .day-title {
+        font-size: 1.6rem;
+    }
+
+    .schedule-image {
+        position: relative;
+        width: 100%;
+        height: auto;
+        max-height: 500px;
+        top: 0;
     }
 }
 
@@ -167,6 +226,79 @@ nav {
 }
 
 .map-link:hover {
+    background: white;
+    color: black;
+}
+
+/* Estilos del Footer */
+footer {
+    background-color: black;
+    padding: 2rem 0;
+    margin-top: 2rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.legal-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.legal-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.legal-links a:hover {
+    opacity: 1;
+}
+
+.copyright {
+    color: white;
+    font-size: 0.9rem;
+    opacity: 0.6;
+}
+
+/* Imagen */
+.schedule-image {
+    width: 45%;
+    height: auto;
+    max-height: 800px;
+    object-fit: cover;
+    align-self: flex-start;
+    position: sticky;
+    top: 80px;
+}
+
+/* Ubicación y botón de maps */
+.location-section {
+    margin-top: 4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+}
+
+.maps-button {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    border: 1px solid white;
+    padding: 0.8rem 1.5rem;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.maps-button:hover {
     background: white;
     color: black;
 }
