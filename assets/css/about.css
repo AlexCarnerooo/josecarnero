@@ -90,17 +90,42 @@
 }
 
 @media (max-width: 768px) {
+    .about-section {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .about-text {
+        max-width: 100%;
+    }
+    
+    .about-image {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
     .about-content {
         padding: 1rem;
     }
-
+    
     .section-title {
         font-size: 1.8rem;
-        margin-bottom: 1.5rem;
     }
-
+    
     .text-section p {
         font-size: 0.9rem;
+    }
+    
+    .quote {
+        font-size: 1.2rem;
     }
 }
 
