@@ -144,24 +144,6 @@ nav {
 
 /* Media Queries para diseño responsive */
 @media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        padding: 1rem;
-    }
-    
-    .logo {
-        margin-bottom: 1rem;
-    }
-    
-    .nav-links {
-        margin: 0.5rem 0;
-        gap: 1.5rem;
-    }
-    
-    .social-icons {
-        margin-top: 0.5rem;
-    }
-    
     .events-content {
         padding: 3rem 1rem;
     }

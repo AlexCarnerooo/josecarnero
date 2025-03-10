@@ -318,9 +318,5 @@ h2:first-of-type {
     h1 {
         font-size: 2rem;
     }
-    
-    .nav-links {
-        gap: 1rem;
-    }
 }
 
