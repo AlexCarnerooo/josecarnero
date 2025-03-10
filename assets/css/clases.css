@@ -11,48 +11,8 @@ body {
     color: white;
 }
 
-/* Navegación */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
+/* Mantener solo los estilos específicos de la página de clases */
 
-.logo a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.2rem;
-}
-
-.nav-links {
-    display: flex;
-    gap: 2rem;
-    margin: 0 auto;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-}
-
-.social-icons {
-    display: flex;
-    gap: 1rem;
-}
-
-.social-icons img {
-    width: 32px;
-    height: 32px;
-}
-
-/* Mantener los estilos específicos de la página de clases */
 .schedule {
     padding-top: 80px;
     min-height: 100vh;
@@ -233,11 +193,6 @@ nav {
 }
 
 @media (max-width: 480px) {
-    .nav-links {
-        gap: 1rem;
-        font-size: 0.9rem;
-    }
-    
     .main-title {
         font-size: 2rem;
     }
