@@ -121,27 +121,34 @@ footer {
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
-        position: absolute;
-        top: 1.5rem;
-        right: 2rem;
+        position: static;
+        margin: 0;
         z-index: 1001;
     }
     
     nav {
-        flex-wrap: wrap;
+        display: flex;
+        flex-wrap: nowrap;
         justify-content: space-between;
+        align-items: center;
         padding: 1rem 2rem;
     }
     
     .logo {
         margin: 0;
-        flex: 1;
+        flex: 0;
     }
     
     .social-icons {
         display: flex;
         position: static;
         margin: 0;
+        justify-content: center;
+    }
+    
+    .social-icons img {
+        width: 24px;
+        height: 24px;
     }
     
     .nav-links {
@@ -159,8 +166,9 @@ footer {
         transition: transform 0.3s ease;
         z-index: 1000;
         width: 100%;
-        order: 3;
         margin: 0;
+        padding-top: 80px;
+        display: flex;
     }
     
     .nav-links.active {
