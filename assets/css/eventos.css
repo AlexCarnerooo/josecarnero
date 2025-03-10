@@ -140,4 +140,92 @@ nav {
     font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 2px;
+}
+
+/* Media Queries para diseño responsive */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .logo {
+        margin-bottom: 1rem;
+    }
+    
+    .nav-links {
+        margin: 0.5rem 0;
+        gap: 1.5rem;
+    }
+    
+    .social-icons {
+        margin-top: 0.5rem;
+    }
+    
+    .events-content {
+        padding: 3rem 1rem;
+    }
+    
+    .main-title {
+        font-size: 3rem;
+    }
+    
+    .subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .event-detail {
+        flex-direction: column;
+        margin: 1rem auto;
+    }
+    
+    .event-image {
+        width: 100%;
+        height: 300px;
+    }
+    
+    .event-info {
+        width: 100%;
+        padding: 2rem;
+    }
+    
+    .event-info .event-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .event-info {
+        padding: 1.5rem;
+    }
+    
+    .event-info .event-title {
+        font-size: 1.8rem;
+    }
+    
+    .event-info .event-date {
+        font-size: 1rem;
+    }
+    
+    .event-info .event-description {
+        font-size: 0.9rem;
+    }
+    
+    .event-button {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .quote {
+        font-size: 1.2rem;
+    }
 } 
