@@ -121,9 +121,9 @@ footer {
 @media (max-width: 768px) {
     nav {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr auto 1fr;
         align-items: center;
-        padding: 1rem;
+        padding: 1rem 2rem;
         position: relative;
     }
     
@@ -131,6 +131,7 @@ footer {
         grid-column: 1;
         margin: 0;
         text-align: left;
+        justify-self: start;
     }
     
     .social-icons {
@@ -141,8 +142,9 @@ footer {
     }
     
     .social-icons img {
-        width: 24px;
-        height: 24px;
+        width: 28px;
+        height: 28px;
+        margin: 0 5px;
     }
     
     .hamburger {
@@ -151,6 +153,9 @@ footer {
         justify-content: flex-end;
         margin: 0;
         z-index: 1001;
+        justify-self: end;
+        width: 30px;
+        height: 21px;
     }
     
     .nav-links {
@@ -180,5 +185,8 @@ footer {
     
     .nav-links a {
         font-size: 1.5rem;
+        padding: 1rem;
+        width: 100%;
+        text-align: center;
     }
 } 
