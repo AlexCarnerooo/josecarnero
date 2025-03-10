@@ -7,11 +7,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Función para manejar el menú según el tamaño de la pantalla
     function handleMenu() {
         if (window.innerWidth <= 768) {
-            navLinks.style.display = 'none';
-            navLinks.style.transform = 'translateY(-100%)';
+            if (!navLinks.classList.contains('active')) {
+                navLinks.style.display = 'none';
+                navLinks.style.transform = 'translateY(-100%)';
+            }
         } else {
             navLinks.style.display = 'flex';
             navLinks.style.transform = '';
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
+            body.style.overflow = '';
         }
     }
     
@@ -21,25 +26,37 @@ document.addEventListener('DOMContentLoaded', function() {
     // Manejar clic en hamburguesa
     if (hamburger) {
         hamburger.addEventListener('click', function(e) {
+            e.preventDefault();
             e.stopPropagation(); // Evitar que el clic se propague
             
             if (navLinks.classList.contains('active')) {
                 // Cerrar menú
-                navLinks.classList.remove('active');
-                body.style.overflow = ''; // Permitir scroll de nuevo
-                setTimeout(function() {
-                    navLinks.style.display = 'none';
-                }, 300); // Esperar a que termine la transición
+                closeMenu();
             } else {
                 // Abrir menú
-                navLinks.style.display = 'flex';
-                // Forzar un reflow para que la transición funcione
-                navLinks.offsetHeight;
-                navLinks.classList.add('active');
-                body.style.overflow = 'hidden'; // Evitar scroll mientras el menú está abierto
+                openMenu();
             }
-            hamburger.classList.toggle('active');
         });
+    }
+    
+    function openMenu() {
+        navLinks.style.display = 'flex';
+        // Forzar un reflow para que la transición funcione
+        navLinks.offsetHeight;
+        navLinks.classList.add('active');
+        hamburger.classList.add('active');
+        body.style.overflow = 'hidden'; // Evitar scroll mientras el menú está abierto
+    }
+    
+    function closeMenu() {
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('active');
+        body.style.overflow = ''; // Permitir scroll de nuevo
+        setTimeout(function() {
+            if (!navLinks.classList.contains('active')) {
+                navLinks.style.display = 'none';
+            }
+        }, 300); // Esperar a que termine la transición
     }
     
     // Cerrar el menú al hacer clic en un enlace
@@ -47,12 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
     navLinksItems.forEach(item => {
         item.addEventListener('click', function() {
             if (window.innerWidth <= 768) {
-                navLinks.classList.remove('active');
-                hamburger.classList.remove('active');
-                body.style.overflow = ''; // Permitir scroll de nuevo
-                setTimeout(function() {
-                    navLinks.style.display = 'none';
-                }, 300);
+                closeMenu();
             }
         });
     });
@@ -64,12 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
             !navLinks.contains(e.target) && 
             !hamburger.contains(e.target)) {
             
-            navLinks.classList.remove('active');
-            hamburger.classList.remove('active');
-            body.style.overflow = '';
-            setTimeout(function() {
-                navLinks.style.display = 'none';
-            }, 300);
+            closeMenu();
         }
     });
     
