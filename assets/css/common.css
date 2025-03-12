@@ -156,11 +156,11 @@ footer {
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(0, 0, 0, 0.95);
+        background-color: black;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 2rem;
+        gap: 2.5rem;
         transform: translateY(-100%);
         transition: transform 0.3s ease;
         z-index: 990;
@@ -177,11 +177,37 @@ footer {
     }
     
     .nav-links a {
-        font-size: 1.5rem;
-        padding: 1rem;
+        font-size: 2rem;
+        padding: 0.5rem;
         width: 100%;
         text-align: center;
         color: white;
         text-decoration: none;
+        font-weight: normal;
+        text-transform: lowercase;
+    }
+    
+    .hamburger.active {
+        position: fixed;
+        top: 1rem;
+        right: 1.5rem;
+        z-index: 1002;
+    }
+    
+    .social-menu-icons {
+        display: flex;
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+    
+    .social-menu-icons a {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+    }
+    
+    .social-menu-icons img {
+        width: 100%;
+        height: 100%;
     }
 } 
