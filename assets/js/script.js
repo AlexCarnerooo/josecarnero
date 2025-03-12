@@ -40,7 +40,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function openMenu() {
+        // Asegurar que el menú esté centrado
         navLinks.style.display = 'flex';
+        navLinks.style.justifyContent = 'center';
+        navLinks.style.alignItems = 'center';
+        
         // Forzar un reflow para que la transición funcione
         navLinks.offsetHeight;
         navLinks.classList.add('active');
