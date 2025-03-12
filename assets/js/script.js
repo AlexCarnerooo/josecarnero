@@ -78,12 +78,17 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinks.classList.add('active');
         hamburger.classList.add('active');
         body.style.overflow = 'hidden'; // Evitar scroll mientras el menú está abierto
+        
+        console.log('Menú abierto');
     }
     
     function closeMenu() {
         navLinks.classList.remove('active');
         hamburger.classList.remove('active');
         body.style.overflow = ''; // Permitir scroll de nuevo
+        
+        console.log('Menú cerrado');
+        
         setTimeout(function() {
             if (!navLinks.classList.contains('active')) {
                 navLinks.style.display = 'none';
@@ -114,4 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Ajustar el menú al cambiar el tamaño de la ventana
     window.addEventListener('resize', handleMenu);
+    
+    // Verificar que los eventos estén correctamente asignados
+    console.log('Script de navegación cargado');
 }); 
