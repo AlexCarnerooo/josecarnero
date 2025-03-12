@@ -23,6 +23,31 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializar el menú
     handleMenu();
     
+    // Añadir iconos sociales al menú desplegable si no existen
+    function addSocialIconsToMenu() {
+        // Verificar si ya existen los iconos sociales en el menú
+        if (!document.querySelector('.social-menu-icons')) {
+            const socialIcons = document.querySelector('.social-icons');
+            if (socialIcons) {
+                // Crear contenedor para iconos sociales en el menú
+                const socialMenuIcons = document.createElement('div');
+                socialMenuIcons.className = 'social-menu-icons';
+                
+                // Clonar los iconos sociales existentes
+                const socialIconsClone = socialIcons.cloneNode(true);
+                const socialLinks = socialIconsClone.querySelectorAll('a');
+                
+                // Añadir cada enlace social al nuevo contenedor
+                socialLinks.forEach(link => {
+                    socialMenuIcons.appendChild(link.cloneNode(true));
+                });
+                
+                // Añadir los iconos sociales al menú desplegable
+                navLinks.appendChild(socialMenuIcons);
+            }
+        }
+    }
+    
     // Manejar clic en hamburguesa
     if (hamburger) {
         hamburger.addEventListener('click', function(e) {
@@ -44,6 +69,9 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinks.style.display = 'flex';
         navLinks.style.justifyContent = 'center';
         navLinks.style.alignItems = 'center';
+        
+        // Añadir iconos sociales al menú
+        addSocialIconsToMenu();
         
         // Forzar un reflow para que la transición funcione
         navLinks.offsetHeight;
