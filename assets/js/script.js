@@ -4,6 +4,29 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelector('.nav-links');
     const body = document.body;
     
+    // Verificar si el menú hamburguesa está en estado activo al cargar la página
+    // (en caso de que la página se recargue con el menú abierto)
+    if (hamburger && hamburger.classList.contains('active')) {
+        // Si está activo al cargar, asegurarnos de que el menú esté visible
+        if (navLinks) {
+            navLinks.style.display = 'flex';
+            navLinks.style.transform = 'translateY(0)';
+            body.style.overflow = 'hidden';
+        }
+    } else {
+        // Si no está activo, asegurarnos de que el hamburger está visible y el menú oculto
+        if (hamburger) {
+            hamburger.classList.remove('active');
+        }
+        if (navLinks) {
+            navLinks.classList.remove('active');
+            if (window.innerWidth <= 768) {
+                navLinks.style.display = 'none';
+                navLinks.style.transform = 'translateY(-100%)';
+            }
+        }
+    }
+    
     // Función para manejar el menú según el tamaño de la pantalla
     function handleMenu() {
         if (window.innerWidth <= 768) {
@@ -15,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
             navLinks.style.display = 'flex';
             navLinks.style.transform = '';
             navLinks.classList.remove('active');
-            hamburger.classList.remove('active');
+            if (hamburger) hamburger.classList.remove('active');
             body.style.overflow = '';
         }
     }
