@@ -17,6 +17,13 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
 }
 
 .logo a {
@@ -88,130 +95,117 @@ footer {
     opacity: 0.6;
 }
 
+/* Estilos menú hamburguesa */
 .hamburger {
     display: none;
     flex-direction: column;
     justify-content: space-between;
-    width: 22px;
+    width: 24px;
     height: 18px;
     cursor: pointer;
-    padding: 0;
-    margin: 0;
     background: transparent;
     border: none;
+    z-index: 1001;
 }
 
 .hamburger span {
     display: block;
-    height: 1px;
+    height: 2px;
     width: 100%;
     background-color: white;
-    border-radius: 0;
     transition: all 0.3s ease;
+    margin-bottom: 4px;
 }
 
-.hamburger.active span:nth-child(1) {
-    transform: translateY(8.5px) rotate(45deg);
+.hamburger span:last-child {
+    margin-bottom: 0;
 }
 
-.hamburger.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-    transform: translateY(-8.5px) rotate(-45deg);
-}
-
+/* Media queries para responsive */
 @media (max-width: 768px) {
     nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem 1.5rem;
+        padding: 1rem 2rem;
+    }
+    
+    /* Menú oculto por defecto */
+    .nav-links {
         position: fixed;
         top: 0;
         left: 0;
-        right: 0;
         width: 100%;
-        z-index: 1000;
-        background-color: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(5px);
+        height: 100%;
+        background: black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        z-index: 999;
     }
     
-    .logo {
-        margin: 0;
-        text-align: left;
+    /* Cuando el menú está activo */
+    .nav-links.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    /* Estilos de los enlaces */
+    .nav-links a {
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+        text-transform: lowercase;
+        text-decoration: none;
+        margin: 15px 0;
+        text-align: center;
+        width: 100%;
+    }
+    
+    /* Iconos sociales */
+    .social-menu-icons {
+        display: flex;
+        gap: 20px;
+        margin-top: 20px;
+    }
+    
+    .social-menu-icons a {
+        font-size: 1.8rem;
+        color: white;
+    }
+    
+    /* Estilos de la hamburguesa */
+    .hamburger {
+        display: flex;
+        position: relative;
+        z-index: 1000;
+    }
+    
+    /* Transformación de la hamburguesa cuando está activa */
+    .hamburger.active span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
     }
     
     .social-icons {
         display: none;
     }
     
-    .hamburger {
-        display: flex;
-        justify-content: flex-end;
-        margin: 0;
-        z-index: 1001;
-    }
-    
-    .nav-links {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: black;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 2.5rem;
-        transform: translateY(-100%);
-        transition: transform 0.3s ease;
-        z-index: 990;
-        width: 100%;
-        height: 100vh;
-        margin: 0;
-        padding: 0;
-        display: none;
-    }
-    
-    .nav-links.active {
-        transform: translateY(0);
-        display: flex !important;
-    }
-    
-    .nav-links a {
-        font-size: 2rem;
-        padding: 0.5rem;
-        width: 100%;
-        text-align: center;
-        color: white;
-        text-decoration: none;
-        font-weight: normal;
-        text-transform: lowercase;
-    }
-    
-    .hamburger.active {
-        position: fixed;
-        top: 1rem;
-        right: 1.5rem;
-        z-index: 1002;
-    }
-    
-    .social-menu-icons {
-        display: flex;
-        gap: 2rem;
-        margin-top: 3rem;
-    }
-    
-    .social-menu-icons a {
-        display: inline-block;
-        width: 30px;
-        height: 30px;
-    }
-    
-    .social-menu-icons img {
-        width: 100%;
-        height: 100%;
+    body > main, section.hero {
+        margin-top: 60px;
     }
 } 
