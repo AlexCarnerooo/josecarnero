@@ -92,8 +92,8 @@ footer {
     display: none;
     flex-direction: column;
     justify-content: space-between;
-    width: 25px;
-    height: 12px;
+    width: 22px;
+    height: 18px;
     cursor: pointer;
     padding: 0;
     margin: 0;
@@ -111,11 +111,15 @@ footer {
 }
 
 .hamburger.active span:nth-child(1) {
-    transform: translateY(5.5px) rotate(45deg);
+    transform: translateY(8.5px) rotate(45deg);
 }
 
 .hamburger.active span:nth-child(2) {
-    transform: translateY(-5.5px) rotate(-45deg);
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8.5px) rotate(-45deg);
 }
 
 @media (max-width: 768px) {
