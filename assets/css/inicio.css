@@ -48,14 +48,6 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.8); /* Fondo semi-transparente */
-    backdrop-filter: blur(5px); /* Efecto de desenfoque */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Línea divisoria sutil */
 }
 
 .logo a {
@@ -85,24 +77,29 @@ nav {
     height: 32px;
 }
 
+/* Estilo general h1 - Comentado para usar estilos específicos para .hero h1 */
+/*
 h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-bottom: 2rem;
+    letter-spacing: 1px;
 }
+*/
 
 .cta button {
     background: none;
     border: 1px solid white;
     color: white;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .cta button:hover {
-    background: white;
-    color: black;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .about {
@@ -144,18 +141,6 @@ h1 {
     line-height: 1.6;
     margin-bottom: 20px;
     color: white;  /* Texto blanco para mantener el tema */
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    .about-container {
-        flex-direction: column;
-        gap: 40px;
-    }
-    
-    .about-text h2 {
-        font-size: 2rem;
-    }
 }
 
 footer {
@@ -202,12 +187,12 @@ footer {
 
 /* Estilos para todas las páginas que no son la principal */
 body > main {
-    margin-top: 100px; /* Espacio para la navegación fija */
+    margin-top: 0;
     padding: 2rem 4rem;
 }
 
 .schedule {
-    padding-top: 80px; /* Reducido de 100px a 80px */
+    padding-top: 80px;
     padding-left: 4rem;
     padding-right: 4rem;
 }
@@ -251,9 +236,9 @@ main.schedule h1 {
 }
 
 .schedule-image {
-    width: 45%; /* Un poco más estrecha que antes */
-    height: 100vh; /* Altura completa de la ventana */
-    object-fit: cover; /* Volvemos a cover para mantener el aspecto */
+    width: 45%;
+    height: 100vh;
+    object-fit: cover;
 }
 
 .location {
@@ -298,43 +283,12 @@ h2:first-of-type {
     margin-top: 0;
 }
 
-/* Media Queries para diseño responsive */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        padding: 1rem;
-    }
-    
-    .logo {
-        margin-bottom: 1rem;
-    }
-    
-    .nav-links {
-        margin: 0.5rem 0;
-    }
-    
-    .social-icons {
-        margin-top: 0.5rem;
-    }
-    
-    h1 {
-        font-size: 2.5rem;
-    }
-    
-    .cta button {
-        padding: 0.8rem 1.5rem;
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        align-items: center;
-        text-align: center;
-    }
-    
-    h1 {
-        font-size: 2rem;
-    }
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
