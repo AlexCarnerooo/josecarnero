@@ -10,6 +10,41 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
+    // Función para añadir iconos sociales al menú desplegable
+    function addSocialIconsToMenu() {
+        if (!document.querySelector('.social-menu-icons')) {
+            const socialIcons = document.querySelector('.social-icons');
+            if (socialIcons) {
+                const socialMenuIcons = document.createElement('div');
+                socialMenuIcons.className = 'social-menu-icons';
+                
+                const socialIconsClone = socialIcons.cloneNode(true);
+                const socialLinks = socialIconsClone.querySelectorAll('a');
+                
+                socialLinks.forEach(link => {
+                    socialMenuIcons.appendChild(link.cloneNode(true));
+                });
+                
+                navLinks.appendChild(socialMenuIcons);
+            }
+        }
+    }
+    
+    // Función para destacar la página actual
+    function highlightCurrentPage() {
+        const currentPath = window.location.pathname;
+        const links = navLinks.querySelectorAll('a');
+        
+        links.forEach(link => {
+            const href = link.getAttribute('href');
+            link.classList.remove('active');
+            
+            if (currentPath.endsWith(href)) {
+                link.classList.add('active');
+            }
+        });
+    }
+
     // Manejar clic en hamburguesa
     hamburger.addEventListener('click', function(e) {
         e.preventDefault();
@@ -24,6 +59,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function openMenu() {
         console.log('Opening menu');
+        
+        // Eliminar cualquier social-menu-icons existente para evitar duplicados
+        const existingSocialIcons = navLinks.querySelector('.social-menu-icons');
+        if (existingSocialIcons) {
+            navLinks.removeChild(existingSocialIcons);
+        }
+        
+        // Añadir iconos sociales al menú
+        addSocialIconsToMenu();
+        
+        // Destacar la página actual
+        highlightCurrentPage();
+        
         navLinks.classList.add('active');
         hamburger.classList.add('active');
         body.style.overflow = 'hidden'; // Evita el scroll de fondo
