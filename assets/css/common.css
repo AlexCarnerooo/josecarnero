@@ -228,13 +228,14 @@ footer {
     
     .social-menu-icons a {
         display: inline-block;
-        width: 28px; 
-        height: 28px;
+        width: 32px; 
+        height: 32px;
     }
     
     .social-menu-icons img {
         width: 100%;
         height: 100%;
+        object-fit: contain;
     }
     
     body > main, section.hero {

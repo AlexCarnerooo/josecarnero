@@ -18,13 +18,40 @@ document.addEventListener('DOMContentLoaded', function() {
                 const socialMenuIcons = document.createElement('div');
                 socialMenuIcons.className = 'social-menu-icons';
                 
-                const socialIconsClone = socialIcons.cloneNode(true);
-                const socialLinks = socialIconsClone.querySelectorAll('a');
+                // Determinar si estamos en el índice o en una subpágina
+                const isIndex = window.location.pathname.endsWith('index.html') || 
+                               window.location.pathname.endsWith('/') ||
+                               window.location.pathname.split('/').pop() === '';
                 
-                socialLinks.forEach(link => {
-                    socialMenuIcons.appendChild(link.cloneNode(true));
-                });
+                // Base path para las imágenes
+                const basePath = isIndex ? 'assets/images/' : '../assets/images/';
                 
+                // Crear los iconos sociales manualmente para asegurar consistencia
+                const gmailLink = document.createElement('a');
+                gmailLink.href = 'mailto:jcarnerovillar@gmail.com';
+                gmailLink.target = '_blank';
+                
+                const gmailImg = document.createElement('img');
+                gmailImg.src = basePath + 'gmail.png';
+                gmailImg.alt = 'Gmail';
+                
+                gmailLink.appendChild(gmailImg);
+                
+                const instagramLink = document.createElement('a');
+                instagramLink.href = 'https://www.instagram.com/jose_carnero_/?igsh=MWRoMzQ4d2VjNTVzNg%3D%3D#';
+                instagramLink.target = '_blank';
+                
+                const instagramImg = document.createElement('img');
+                instagramImg.src = basePath + 'instagram.png';
+                instagramImg.alt = 'Instagram';
+                
+                instagramLink.appendChild(instagramImg);
+                
+                // Añadir los enlaces al contenedor
+                socialMenuIcons.appendChild(gmailLink);
+                socialMenuIcons.appendChild(instagramLink);
+                
+                // Añadir el contenedor al menú
                 navLinks.appendChild(socialMenuIcons);
             }
         }
