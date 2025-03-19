@@ -2,14 +2,20 @@
 /* Mantener solo los estilos específicos de la página de eventos */
 
 .events {
-    padding-top: 80px;
+    padding: 2rem;
     min-height: 100vh;
-    background-image: url('../images/foto_eventos.jpg');
+    background-image: url('../images/webp/foto_eventos.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
     position: relative;
+}
+
+/* Fallback para navegadores que no soporten WebP */
+@supports not (background-image: url('../images/webp/foto_eventos.webp')) {
+    .events {
+        background-image: url('../images/foto_eventos.jpg');
+    }
 }
 
 .events::before {

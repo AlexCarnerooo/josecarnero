@@ -1,8 +1,19 @@
 /* Estilos para la página About */
 .about {
-    padding-top: 80px;
+    padding: 2rem;
     min-height: 100vh;
-    background-color: black;
+    background-image: url('../images/webp/foto_sobre_mi.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/* Fallback para navegadores que no soporten WebP */
+@supports not (background-image: url('../images/webp/foto_sobre_mi.webp')) {
+    .about {
+        background-image: url('../images/foto_sobre_mi.jpg');
+    }
 }
 
 .about-content {
@@ -51,6 +62,23 @@
     height: 300px;
     object-fit: cover;
     margin-top: 1rem;
+}
+
+.about-content img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 2rem 0;
+    content: url('../images/webp/foto_sobre_mi_2.webp');
+}
+
+/* Fallback para la imagen de contenido */
+@supports not (content: url('../images/webp/foto_sobre_mi_2.webp')) {
+    .about-content img {
+        content: url('../images/foto_sobre_mi_2.jpg');
+    }
 }
 
 /* Responsive */

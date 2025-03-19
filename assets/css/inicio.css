@@ -14,17 +14,24 @@ body {
 
 .hero {
     height: 100vh;
-    background-color: #000; /* Color de fondo mientras carga la imagen */
-    background-image: url('../images/foto_inicio.jpg');
+    background-image: url('../images/webp/foto_inicio.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: flex-start;
-    padding: 0 2rem;
+    justify-content: center;
+    text-align: left;
     position: relative;
+    padding-left: 5rem;
+}
+
+/* Fallback para navegadores que no soporten WebP */
+@supports not (background-image: url('../images/webp/foto_inicio.webp')) {
+    .hero {
+        background-image: url('../images/foto_inicio.jpg');
+    }
 }
 
 .hero::before {
@@ -38,9 +45,18 @@ body {
     z-index: 1;
 }
 
-.hero h1, .hero .cta {
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
     position: relative;
     z-index: 2;
+    text-align: left;
+}
+
+.hero .cta {
+    position: relative;
+    z-index: 2;
+    text-align: left;
 }
 
 nav {
@@ -283,12 +299,15 @@ h2:first-of-type {
     margin-top: 0;
 }
 
-.hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    letter-spacing: 2px;
-    line-height: 1.2;
-    font-weight: bold;
-    text-transform: uppercase;
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    .hero {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
 }
 
