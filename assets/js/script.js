@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     const body = document.body;
+    const socialIcons = document.querySelector('.social-icons');
 
     if (!hamburger || !navLinks) {
         console.error('Elementos de navegación no encontrados');
@@ -73,14 +74,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Manejar clic en hamburguesa
-    hamburger.addEventListener('click', function(e) {
-        e.preventDefault();
-        console.log('Hamburger clicked');
-
+    hamburger.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+        hamburger.classList.toggle('active');
+        
+        // Si el menú está activo, mover los iconos sociales dentro del menú
         if (navLinks.classList.contains('active')) {
-            closeMenu();
+            const menuSocialIcons = socialIcons.cloneNode(true);
+            menuSocialIcons.classList.add('menu-social-icons');
+            navLinks.appendChild(menuSocialIcons);
         } else {
-            openMenu();
+            // Remover los iconos clonados cuando se cierra el menú
+            const menuSocialIcons = navLinks.querySelector('.social-icons');
+            if (menuSocialIcons) {
+                menuSocialIcons.remove();
+            }
         }
     });
 

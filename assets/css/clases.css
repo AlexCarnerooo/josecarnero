@@ -15,12 +15,12 @@ body {
 
 .schedule {
     min-height: 100vh;
-    background-color: black; /* Cambiado de verde a negro */
+    background-color: black;
     position: relative;
     display: flex;
     align-items: flex-start;
     overflow-x: hidden;
-    padding-top: 5rem; /* Añadido padding superior para evitar solapamiento con nav */
+    padding-top: 5rem;
     padding-left: 3rem;
     padding-right: 3rem;
 }
@@ -36,7 +36,7 @@ body {
 
 .schedule-text {
     width: 100%;
-    background-color: rgba(0, 0, 0, 1); /* Negro sólido */
+    background-color: rgba(0, 0, 0, 1);
     padding: 3rem;
     height: fit-content;
     display: flex;
@@ -156,9 +156,37 @@ body {
 }
 
 @media (max-width: 768px) {    
+    .schedule {
+        background-image: url('../images/webp/pino.webp');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        padding: 2rem;
+        padding-top: 5rem;
+        position: relative;
+    }
+
+    .schedule::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+    }
+
     .schedule-content {
         width: 100%;
-        margin-left: 0;
+        margin: 0;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .schedule-text {
+        background-color: transparent;
+        padding: 2rem;
     }
     
     .main-title {
@@ -270,5 +298,12 @@ footer {
 @supports not (background-image: url('../images/webp/pino.webp')) {
     .schedule-image {
         background-image: url('../images/pino.jpg');
+    }
+}
+
+/* Eliminar la clase .schedule-image ya que no la necesitamos en móvil */
+@media (max-width: 768px) {
+    .schedule-image {
+        display: none;
     }
 }
