@@ -19,7 +19,10 @@
 .about-content {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 2rem;
+    padding-top: 120px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
 }
 
 .about-section {
@@ -62,22 +65,28 @@
     height: 300px;
     object-fit: cover;
     margin-top: 1rem;
-}
-
-.about-content img {
-    width: 100%;
-    max-width: 500px;
-    height: auto;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 2rem 0;
+}
+
+.about-section:first-child .about-image {
     content: url('../images/webp/foto_sobre_mi_2.webp');
 }
 
-/* Fallback para la imagen de contenido */
+.about-section:last-child .about-image {
+    content: url('../images/webp/cerradura.webp');
+}
+
+/* Fallback para navegadores que no soporten WebP */
 @supports not (content: url('../images/webp/foto_sobre_mi_2.webp')) {
-    .about-content img {
+    .about-section:first-child .about-image {
         content: url('../images/foto_sobre_mi_2.jpg');
+    }
+}
+
+@supports not (content: url('../images/webp/cerradura.webp')) {
+    .about-section:last-child .about-image {
+        content: url('../images/cerradura.jpg');
     }
 }
 
@@ -273,4 +282,31 @@ nav {
     font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 2px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.social-icons a:hover {
+    transform: scale(1.1);
+}
+
+.social-icons svg {
+    width: 24px;
+    height: 24px;
+    transition: stroke 0.3s ease;
+}
+
+.social-icons a:hover svg {
+    stroke: #ffffff;
 } 
