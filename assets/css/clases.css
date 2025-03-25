@@ -157,7 +157,7 @@ body {
 
 @media (max-width: 768px) {    
     .schedule {
-        background-image: url('../images/webp/pino.webp');
+        background-image: url('../images/mobile/pino_mobile.webp');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -188,7 +188,11 @@ body {
         background-color: transparent;
         padding: 2rem;
     }
-    
+
+    .schedule-image {
+        display: none;
+    }
+
     .main-title {
         font-size: 3rem;
     }
@@ -289,7 +293,7 @@ footer {
     height: calc(100% - 12rem);
     background-image: url('../images/webp/pino.webp');
     background-size: cover;
-    background-position: center 30%;
+    background-position: center;
     background-repeat: no-repeat;
     clip-path: inset(0);
 }
@@ -299,11 +303,9 @@ footer {
     .schedule-image {
         background-image: url('../images/pino.jpg');
     }
-}
-
-/* Eliminar la clase .schedule-image ya que no la necesitamos en móvil */
-@media (max-width: 768px) {
-    .schedule-image {
-        display: none;
+    @media (max-width: 768px) {
+        .schedule {
+            background-image: url('../images/mobile/pino_mobile.jpg');
+        }
     }
 }

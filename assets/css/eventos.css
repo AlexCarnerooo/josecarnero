@@ -11,10 +11,21 @@
     position: relative;
 }
 
+@media (max-width: 768px) {
+    .events {
+        background-image: url('../images/mobile/foto_eventos_mobile.webp');
+    }
+}
+
 /* Fallback para navegadores que no soporten WebP */
 @supports not (background-image: url('../images/webp/foto_eventos.webp')) {
     .events {
         background-image: url('../images/foto_eventos.jpg');
+    }
+    @media (max-width: 768px) {
+        .events {
+            background-image: url('../images/mobile/foto_eventos_mobile.jpg');
+        }
     }
 }
 
