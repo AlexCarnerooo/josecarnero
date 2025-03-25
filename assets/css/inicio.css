@@ -27,10 +27,21 @@ body {
     padding-left: 5rem;
 }
 
+@media (max-width: 768px) {
+    .hero {
+        background-image: url('../images/mobile/foto_inicio_mobile.webp');
+    }
+}
+
 /* Fallback para navegadores que no soporten WebP */
 @supports not (background-image: url('../images/webp/foto_inicio.webp')) {
     .hero {
         background-image: url('../images/foto_inicio.jpg');
+    }
+    @media (max-width: 768px) {
+        .hero {
+            background-image: url('../images/mobile/foto_inicio_mobile.jpg');
+        }
     }
 }
 

@@ -9,10 +9,21 @@
     position: relative;
 }
 
+@media (max-width: 768px) {
+    .about {
+        background-image: url('../images/mobile/foto_sobre_mi_mobile.webp');
+    }
+}
+
 /* Fallback para navegadores que no soporten WebP */
 @supports not (background-image: url('../images/webp/foto_sobre_mi.webp')) {
     .about {
         background-image: url('../images/foto_sobre_mi.jpg');
+    }
+    @media (max-width: 768px) {
+        .about {
+            background-image: url('../images/mobile/foto_sobre_mi_mobile.jpg');
+        }
     }
 }
 
@@ -77,16 +88,35 @@
     content: url('../images/webp/cerradura.webp');
 }
 
+@media (max-width: 768px) {
+    .about-section:first-child .about-image {
+        content: url('../images/mobile/foto_sobre_mi_2_mobile.webp');
+    }
+    .about-section:last-child .about-image {
+        content: url('../images/mobile/cerradura_mobile.webp');
+    }
+}
+
 /* Fallback para navegadores que no soporten WebP */
 @supports not (content: url('../images/webp/foto_sobre_mi_2.webp')) {
     .about-section:first-child .about-image {
         content: url('../images/foto_sobre_mi_2.jpg');
+    }
+    @media (max-width: 768px) {
+        .about-section:first-child .about-image {
+            content: url('../images/mobile/foto_sobre_mi_2_mobile.jpg');
+        }
     }
 }
 
 @supports not (content: url('../images/webp/cerradura.webp')) {
     .about-section:last-child .about-image {
         content: url('../images/cerradura.jpg');
+    }
+    @media (max-width: 768px) {
+        .about-section:last-child .about-image {
+            content: url('../images/mobile/cerradura_mobile.jpg');
+        }
     }
 }
 
