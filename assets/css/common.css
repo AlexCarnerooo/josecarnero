@@ -3,12 +3,39 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+html.menu-open,
+body.menu-open {
+    overflow: hidden !important;
+    position: fixed !important;
+    height: 100% !important;
+    width: 100% !important;
+    touch-action: none !important;
+    -webkit-overflow-scrolling: none;
+    overscroll-behavior: none;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     font-family: Arial, sans-serif;
     background-color: black;
     color: white;
+    position: relative;
+}
+
+body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
 }
 
 /* Navegación */
@@ -187,8 +214,9 @@ footer {
         left: 0;
         right: 0;
         bottom: 0;
-        width: 100%;
+        width: 100vw;
         height: 100vh;
+        max-height: 100vh;
         background-color: rgba(0, 0, 0, 0.95);
         display: flex;
         flex-direction: column;
@@ -202,6 +230,10 @@ footer {
         z-index: 1000;
         padding-top: 120px;
         margin: 0;
+        overflow: hidden !important;
+        overscroll-behavior: none;
+        -webkit-overflow-scrolling: none;
+        touch-action: none;
     }
     
     /* Cuando el menú está activo */
@@ -209,6 +241,8 @@ footer {
         opacity: 1;
         visibility: visible;
         pointer-events: all;
+        position: fixed;
+        overflow: hidden !important;
     }
     
     /* Estilos de los enlaces - ahora más grandes y centrados */
@@ -261,23 +295,15 @@ footer {
     }
 }
 
+/* Eliminar todos los estilos duplicados del menú activo */
 .nav-links.active {
     display: flex;
     flex-direction: column;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: black;
-    justify-content: center;
     align-items: center;
-    z-index: 1000;
 }
 
 .nav-links.active a {
     margin: 1rem 0;
-    font-size: 1.5rem;
 }
 
 /* Estilos para los iconos sociales en el menú móvil */
