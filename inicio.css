@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jose Carnero Yoga</title>
+    <link rel="stylesheet" href="assets/css/inicio.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <a href="inicio.html">josecarnero</a>
+        </div>
+        <div class="nav-links">
+            <a href="pages/about.html">about</a>
+            <a href="pages/clases.html">clases</a>
+            <a href="#">contact</a>
+        </div>
+        <div class="social-icons">
+            <a href="mailto:josecv_box@gmail.com" target="_blank"><img src="assets/images/gmail.png" alt="Gmail"></a>
+            <a href="https://www.instagram.com/jose_carnero_/?igsh=MWRoMzQ4d2VjNTVzNg%3D%3D#" target="_blank"><img src="assets/images/instagram.png" alt="Instagram"></a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="hero">
+            <h1>JOSE CARNERO</h1>
+            <h2>ASHTANGA & ROCKET YOGA</h2>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="legal-links">
+                <a href="#">Política de Privacidad</a>
+                <a href="#">Aviso Legal</a>
+                <a href="#">Política de Cookies</a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Jose Carnero Yoga. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
