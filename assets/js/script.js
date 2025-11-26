@@ -132,4 +132,20 @@ document.addEventListener('DOMContentLoaded', function() {
             closeMenu();
         }
     });
+
+    // Desplazamiento suave al abrir detalles de eventos
+    const accordions = document.querySelectorAll('.event-accordion');
+    accordions.forEach(accordion => {
+        accordion.addEventListener('toggle', function() {
+            if (accordion.open) {
+                setTimeout(() => {
+                    accordion.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                        inline: 'nearest'
+                    });
+                }, 150);
+            }
+        });
+    });
 });
