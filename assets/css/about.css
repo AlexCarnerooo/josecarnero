@@ -8,6 +8,8 @@
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
+    content-visibility: auto;
+    contain-intrinsic-size: 100vh;
 }
 
 @media (max-width: 768px) {
@@ -194,8 +196,13 @@
     }
 
     .about-hero {
+        flex-direction: column;
         gap: 2rem;
         margin-bottom: 3rem;
+        max-width: 800px;
+        width: 100%;
+        padding: 0 1.5rem;
+        box-sizing: border-box;
     }
 
     .about-hero-image {
@@ -208,9 +215,9 @@
 
     .about-hero-text {
         width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 2rem 1.5rem;
+        max-width: 100%;
+        margin: 0;
+        padding: 2rem 0;
         background-color: rgba(0, 0, 0, 0.4);
         backdrop-filter: blur(10px);
         border-radius: 8px;
@@ -227,7 +234,7 @@
     .about-text-block {
         max-width: 800px;
         margin: 0 auto;
-        padding: 2rem 1.5rem;
+        padding: 2rem 0;
         margin-bottom: 2.5rem;
         box-sizing: border-box;
     }
