@@ -148,4 +148,86 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Carruseles de imágenes en la página de eventos (por ejemplo San Xurxo)
+    const carousels = document.querySelectorAll('.event-carousel');
+
+    carousels.forEach(carousel => {
+        const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+        const dots = Array.from(carousel.querySelectorAll('.dot'));
+        const prevBtn = carousel.querySelector('.carousel-control.prev');
+        const nextBtn = carousel.querySelector('.carousel-control.next');
+
+        if (!slides.length) return;
+
+        let currentIndex = 0;
+        let intervalId = null;
+        const AUTO_INTERVAL = 5000;
+
+        function showSlide(index) {
+            currentIndex = (index + slides.length) % slides.length;
+
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === currentIndex);
+            });
+
+            if (dots.length) {
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+        }
+
+        function nextSlide() {
+            showSlide(currentIndex + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentIndex - 1);
+        }
+
+        function startAuto() {
+            if (intervalId) return;
+            intervalId = setInterval(nextSlide, AUTO_INTERVAL);
+        }
+
+        function stopAuto() {
+            if (!intervalId) return;
+            clearInterval(intervalId);
+            intervalId = null;
+        }
+
+        // Controles
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                stopAuto();
+                nextSlide();
+                startAuto();
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                stopAuto();
+                prevSlide();
+                startAuto();
+            });
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                stopAuto();
+                showSlide(index);
+                startAuto();
+            });
+        });
+
+        // Pausar autoplay al pasar el ratón por encima (solo desktop)
+        carousel.addEventListener('mouseenter', stopAuto);
+        carousel.addEventListener('mouseleave', startAuto);
+
+        // Iniciar
+        showSlide(0);
+        startAuto();
+    });
 });

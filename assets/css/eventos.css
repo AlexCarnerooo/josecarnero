@@ -17,6 +17,14 @@
 @media (max-width: 768px) {
     .events {
         background-image: url('../images/mobile/foto_eventos_mobile.webp');
+        background-size: contain; /* Cambio de cover a contain para evitar zoom excesivo */
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: scroll; /* Evita problemas de rendimiento en móvil */
+        image-rendering: -webkit-optimize-contrast; /* Suaviza la imagen */
+        image-rendering: crisp-edges;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
     }
 }
 
@@ -28,6 +36,14 @@
     @media (max-width: 768px) {
         .events {
             background-image: url('../images/mobile/foto_eventos_mobile.jpg');
+            background-size: contain; /* Cambio de cover a contain para evitar zoom excesivo */
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
     }
 }
@@ -120,6 +136,13 @@
     inset: 0.2rem;
     border: 1px dashed rgba(255, 255, 255, 0.35);
     pointer-events: none;
+}
+
+/* Variante para mostrar la banda en el lado derecho (por ejemplo en Marruecos) */
+.event-ribbon-right {
+    left: auto;
+    right: -3rem;
+    transform: rotate(30deg);
 }
 
 .event-image {
@@ -317,155 +340,83 @@
     background-color: #ff5a5f;
 }
 
-.quote-section {
-    text-align: center;
-    margin: 6rem auto 3rem;
-    max-width: 800px;
-    padding: 0 2rem;
+/* Carrusel de imágenes dentro de la tarjeta de evento (por ejemplo San Xurxo) */
+.event-carousel {
+    position: relative;
+    overflow: hidden;
 }
 
-.quote {
-    font-size: 1.5rem;
-    font-style: italic;
-    line-height: 1.6;
-    margin-bottom: 1rem;
+.event-carousel .carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: transparent;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
 }
 
-.quote-author {
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+.event-carousel .carousel-slide.active {
+    opacity: 1;
 }
 
-/* Media Queries para diseño responsive */
-@media (max-width: 768px) {
-    .events-content {
-        padding: 3rem 1rem;
-    }
-    
-    .main-title {
-        font-size: 3rem;
-    }
-    
-    .subtitle {
-        font-size: 1.5rem;
-        margin-bottom: 2rem;
-    }
-    
-    .event-detail {
-        flex-direction: column;
-        margin: 1rem auto;
-    }
-    
-    .event-detail.reverse {
-        flex-direction: column;
-    }
-    
-    .event-image {
-        width: 100%;
-        height: 260px;
-    }
-    
-    .event-info {
-        width: 100%;
-        padding: 2rem;
-    }
-    
-    .event-info .event-title {
-        font-size: 2rem;
-    }
-
-    .event-info .event-date {
-        font-size: 1.05rem;
-        margin-bottom: 1rem;
-    }
-
-    .event-info .event-description {
-        font-size: 0.95rem;
-        margin-bottom: 1.2rem;
-    }
-
-    .event-accordion {
-        padding-top: 0.6rem;
-    }
-
-    .event-accordion summary {
-        font-size: 0.75rem;
-        letter-spacing: 0.16em;
-    }
-
-    .event-info-block {
-        padding-top: 0.8rem;
-        padding-bottom: 0.6rem;
-    }
-
-    .event-info-block h3 {
-        font-size: 0.85rem;
-        letter-spacing: 0.18em;
-    }
-
-    .event-schedule li {
-        font-size: 0.85rem;
-        padding: 0.3rem 0.4rem;
-    }
-
-    .event-schedule strong {
-        font-size: 0.9rem;
-    }
-
-    .event-actions {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .event-button {
-        width: 100%;
-        text-align: center;
-    }
+.event-carousel .carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    z-index: 3;
 }
 
-@media (max-width: 480px) {
-    .main-title {
-        font-size: 2.5rem;
-    }
-    
-    .subtitle {
-        font-size: 1.2rem;
-    }
-    
-    .event-info {
-        padding: 1.5rem;
-    }
-    
-    .event-info .event-title {
-        font-size: 1.8rem;
-    }
-    
-    .event-info .event-date {
-        font-size: 1rem;
-    }
-    
-    .event-info .event-description {
-        font-size: 0.9rem;
-    }
+.event-carousel .carousel-control.prev {
+    left: 0.75rem;
+}
 
-    .event-label {
-        font-size: 0.7rem;
-        letter-spacing: 0.12em;
-    }
+.event-carousel .carousel-control.next {
+    right: 0.75rem;
+}
 
-    .event-schedule li {
-        font-size: 0.8rem;
-    }
-    
-    .event-button {
-        padding: 0.5rem 1.5rem;
-        font-size: 0.9rem;
-    }
-    
-    .quote {
-        font-size: 1.2rem;
-    }
+.event-carousel .carousel-dots {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.35rem;
+    z-index: 3;
+}
+
+.event-carousel .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    padding: 0;
+}
+
+.event-carousel .dot.active {
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+/* Carrusel grande para "La casa y el entorno" en página de evento */
+.event-detail-page .house-carousel {
+    max-width: 900px;
+    height: 420px;
+    margin: 2rem auto 0;
 }
 
 /* Estilos para página dedicada del evento */
@@ -588,11 +539,40 @@
     border-left: 3px solid rgba(255, 255, 255, 0.3);
 }
 
+.schedule-section {
+    /* eliminar posibles desplazamientos laterales del h2 */
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.schedule-wrapper {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.schedule-wrapper > h2 {
+    text-align: center;
+    margin: 0 0 1.5rem;
+}
+
+.schedule-block {
+    width: 100%;
+    margin: 0 auto 1.5rem auto;
+}
+
+.schedule-inner {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
 .schedule-block h3 {
     font-size: 1.15rem;
-    margin-bottom: 0.8rem;
+    margin: 0 0 0.8rem 0;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    text-align: center;
 }
 
 .schedule-list {
@@ -602,6 +582,10 @@
 }
 
 .schedule-list li {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    column-gap: 1rem;
+    align-items: baseline;
     padding: 0.5rem 0;
     font-size: 0.95rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -612,10 +596,667 @@
 }
 
 .schedule-list li strong {
-    display: inline-block;
-    min-width: 130px;
-    margin-right: 0.5rem;
+    display: block;
+    justify-self: end;
+    text-align: right;
+    white-space: nowrap;
 }
+
+.schedule-desc {
+    justify-self: start;
+    text-align: left;
+}
+
+.schedule-list li .highlight {
+    display: inline-block;
+    font-size: 1.02rem;
+    font-weight: 600;
+    white-space: nowrap;
+    color: #ffffff;
+}
+
+.workshop-block {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.workshop-block:last-child {
+    margin-bottom: 0;
+}
+
+.workshop-block h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #a08676;
+}
+
+.workshop-block p {
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+.location-section {
+    background-color: rgba(255, 255, 255, 0.12);
+    padding: 1.5rem;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.location-info {
+    margin-bottom: 1.2rem;
+}
+
+.location-info p {
+    margin-bottom: 0.4rem;
+    font-size: 1rem;
+}
+
+.contact-info p {
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+}
+
+.contact-info a {
+    color: #fff;
+    text-decoration: underline;
+    transition: opacity 0.3s ease;
+}
+
+.contact-info a:hover {
+    opacity: 0.7;
+}
+
+.event-detail-page .event-actions {
+    margin-top: 2.5rem;
+    justify-content: center;
+    gap: 1.2rem;
+}
+
+.event-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.event-gallery img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+.quote-section {
+    text-align: center;
+    margin: 6rem auto 3rem;
+    max-width: 800px;
+    padding: 0 2rem;
+}
+
+.quote {
+    font-size: 1.5rem;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.quote-author {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* ============================================
+   MEDIA QUERIES - SOLO MÓVIL (NO AFECTA DESKTOP)
+   ============================================ */
+
+/* Breakpoint principal: Tablet y móvil */
+@media (max-width: 768px) {
+    /* ===== PÁGINA PRINCIPAL DE EVENTOS (eventos.html) ===== */
+    
+    .events-content {
+        padding: 3rem 1rem;
+    }
+    
+    .main-title {
+        font-size: 3rem;
+    }
+    
+    .subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    /* Layout: pasar de flex horizontal a columna - ESPECIFICIDAD AUMENTADA */
+    .events-content .event-detail {
+        flex-direction: column;
+        margin: 1rem auto;
+        margin-bottom: 3rem; /* Aumentar espacio vertical entre cards en móvil */
+    }
+    
+    .events-content .event-detail.reverse {
+        flex-direction: column;
+    }
+    
+    /* Imágenes: ancho completo y altura ajustada */
+    .events-content .event-image {
+        width: 100%;
+        height: 260px;
+    }
+    
+    /* Info: ancho completo y padding reducido */
+    .events-content .event-info {
+        width: 100%;
+        padding: 2rem;
+    }
+    
+    /* Tamaños de texto */
+    .events-content .event-info .event-title {
+        font-size: 2rem;
+    }
+
+    .events-content .event-info .event-date {
+        font-size: 1.05rem;
+        margin-bottom: 1rem;
+    }
+
+    .events-content .event-info .event-description {
+        font-size: 0.95rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .events-content .event-accordion {
+        padding-top: 0.6rem;
+    }
+
+    .events-content .event-accordion summary {
+        font-size: 0.75rem;
+        letter-spacing: 0.16em;
+    }
+
+    .events-content .event-info-block {
+        padding-top: 0.8rem;
+        padding-bottom: 0.6rem;
+    }
+
+    .events-content .event-info-block h3 {
+        font-size: 0.85rem;
+        letter-spacing: 0.18em;
+    }
+
+    .events-content .event-schedule li {
+        font-size: 0.85rem;
+        padding: 0.3rem 0.4rem;
+    }
+
+    .events-content .event-schedule strong {
+        font-size: 0.9rem;
+    }
+
+    /* Botones: columna completa */
+    .events-content .event-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .events-content .event-button {
+        width: 100%;
+        text-align: center;
+    }
+    
+    /* ===== PÁGINAS DE DETALLE DE EVENTO ===== */
+    
+    .event-detail-page {
+        padding: 1rem 0;
+    }
+
+    .event-header {
+        margin-bottom: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .event-header .event-title {
+        font-size: 2rem;
+    }
+
+    .event-header .event-date {
+        font-size: 1rem;
+    }
+
+    /* Layout intro: pasar de flex horizontal a columna - ESPECIFICIDAD AUMENTADA */
+    .event-detail-page .event-intro-layout {
+        flex-direction: column;
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+        padding: 0 1rem;
+    }
+
+    .event-detail-page .event-intro-image {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .event-detail-page .event-intro-text h2 {
+        font-size: 1.4rem;
+    }
+
+    .event-detail-page .event-content-sections {
+        padding: 0 1rem;
+    }
+
+    .event-detail-page .event-section {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .event-detail-page .event-section h2 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+
+    .event-detail-page .event-section p {
+        font-size: 0.95rem;
+        line-height: 1.65;
+    }
+
+    /* Cronograma: layout vertical en móvil - ESPECIFICIDAD AUMENTADA */
+    .event-detail-page .schedule-inner {
+        max-width: 100%;
+        padding: 0 0.75rem;
+    }
+
+    .event-detail-page .schedule-block {
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1.2rem;
+    }
+
+    .event-detail-page .schedule-block h3 {
+        font-size: 1.05rem;
+    }
+
+    /* En móvil: apilar en vertical (una columna) */
+    .event-detail-page .schedule-list li {
+        display: grid;
+        grid-template-columns: 1fr;   /* una columna */
+        row-gap: 0.35rem;
+        text-align: center;
+        padding: 0.7rem 0;
+        font-size: 0.9rem;
+    }
+
+    /* Hora arriba centrada */
+    .event-detail-page .schedule-list li strong {
+        justify-self: center;
+        text-align: center;
+        min-width: 0;
+        display: block;
+        margin-bottom: 0;
+    }
+
+    /* Descripción debajo centrada y con ancho controlado */
+    .event-detail-page .schedule-desc {
+        justify-self: center;
+        text-align: center;
+        max-width: 26ch;     /* para que no se vaya demasiado ancho */
+        line-height: 1.4;
+    }
+
+    /* "Tiempo libre" centrado y sin partir */
+    .event-detail-page .schedule-desc .highlight {
+        display: inline-block;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .event-detail-page .workshop-block {
+        padding: 1rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .event-detail-page .workshop-block h3 {
+        font-size: 1.1rem;
+    }
+
+    .event-detail-page .workshop-block p {
+        font-size: 0.9rem;
+    }
+
+    .event-detail-page .location-section {
+        padding: 1.2rem;
+    }
+
+    .event-detail-page .location-info p {
+        font-size: 0.95rem;
+    }
+
+    /* Teléfono: evitar saltos de línea y mejorar legibilidad */
+    .event-detail-page .contact-info p {
+        font-size: 1rem;
+        text-align: center;
+        line-height: 1.6;
+    }
+
+    .event-detail-page .contact-info a {
+        white-space: nowrap;
+        display: inline-block;
+        font-size: 1.05rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+    }
+    
+    /* ===== GALERÍAS Y CARRUSELES ===== */
+    
+    .event-detail-page .event-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .event-detail-page .event-gallery img {
+        height: 190px;
+    }
+    
+    /* Carrusel "La casa y el entorno" */
+    .event-detail-page .house-carousel {
+        max-width: 100%;
+        height: 360px;
+    }
+}
+
+/* Breakpoint secundario: móviles pequeños */
+@media (max-width: 480px) {
+    /* ===== PÁGINA PRINCIPAL DE EVENTOS ===== */
+    
+    .main-title {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .events-content .event-info {
+        padding: 1.5rem;
+    }
+    
+    .events-content .event-info .event-title {
+        font-size: 1.8rem;
+    }
+    
+    .events-content .event-info .event-date {
+        font-size: 1rem;
+    }
+    
+    .events-content .event-info .event-description {
+        font-size: 0.9rem;
+    }
+
+    .events-content .event-label {
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+    }
+
+    .events-content .event-schedule li {
+        font-size: 0.8rem;
+    }
+    
+    .events-content .event-button {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .quote {
+        font-size: 1.2rem;
+    }
+    
+    /* ===== PÁGINAS DE DETALLE DE EVENTO ===== */
+    
+    .event-header .event-title {
+        font-size: 1.7rem;
+    }
+
+    .event-section h2 {
+        font-size: 1.3rem;
+    }
+
+    .event-detail-page .schedule-block h3,
+    .event-detail-page .workshop-block h3 {
+        font-size: 1rem;
+    }
+
+    /* Cronograma: ajustes adicionales para móviles pequeños */
+    .event-detail-page .schedule-desc {
+        max-width: 22ch;
+        font-size: 0.95rem;
+    }
+
+    /* Información y reservas: ajustes adicionales para móviles pequeños */
+    .event-detail-page .contact-info a {
+        font-size: 1.1rem;
+    }
+    
+    /* ===== GALERÍAS Y CARRUSELES ===== */
+    
+    .event-detail-page .event-gallery {
+        grid-template-columns: 1fr; /* Una sola columna */
+    }
+
+    .event-detail-page .event-gallery img {
+        height: 210px;
+    }
+    
+    /* Carrusel "La casa y el entorno" */
+    .event-detail-page .house-carousel {
+        height: 320px;
+    }
+}
+
+
+/* Estilos para página dedicada del evento */
+.event-detail-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1.5rem 0;
+}
+
+.event-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 0 1.5rem;
+}
+
+.event-header .event-title {
+    font-size: 2.4rem;
+    margin: 0.8rem 0;
+    font-weight: normal;
+}
+
+.event-header .event-date {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.event-intro-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    margin: 2rem 0 3.5rem 0;
+    padding: 0 1.5rem;
+}
+
+.event-intro-image {
+    flex: 0 0 45%;
+    width: 45%;
+}
+
+.event-intro-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    object-fit: cover;
+}
+
+.event-intro-text {
+    flex: 1;
+}
+
+.event-intro-text h2 {
+    font-size: 1.6rem;
+    font-weight: normal;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.event-intro-text p {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    opacity: 0.95;
+}
+
+.event-intro-text p:last-child {
+    margin-bottom: 0;
+}
+
+.event-intro-text strong {
+    font-weight: 600;
+    opacity: 1;
+}
+
+.event-content-sections {
+    padding: 0 1.5rem;
+    max-width: 100%;
+}
+
+.event-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.event-section:last-of-type {
+    border-bottom: none;
+}
+
+.event-section h2 {
+    font-size: 1.6rem;
+    font-weight: normal;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.event-section p {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    opacity: 0.95;
+}
+
+.event-section p:last-child {
+    margin-bottom: 0;
+}
+
+.event-section strong {
+    font-weight: 600;
+    opacity: 1;
+}
+
+.schedule-block {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    border-left: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.schedule-section {
+    /* eliminar posibles desplazamientos laterales del h2 */
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.schedule-wrapper {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.schedule-wrapper > h2 {
+    text-align: center;
+    margin: 0 0 1.5rem;
+}
+
+.schedule-block {
+    width: 100%;
+    margin: 0 auto 1.5rem auto;
+}
+
+.schedule-inner {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.schedule-block h3 {
+    font-size: 1.15rem;
+    margin: 0 0 0.8rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
+
+.schedule-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.schedule-list li {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    column-gap: 1rem;
+    align-items: baseline;
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    /* ELIMINADO text-align: center; - no debe centrar el li completo */
+}
+
+.schedule-list li:last-child {
+    border-bottom: none;
+}
+
+.schedule-list li strong {
+    display: block;
+    justify-self: end;      /* alinea la hora a la derecha de su columna */
+    text-align: right;
+    white-space: nowrap;
+}
+
+/* Texto de la segunda columna */
+.schedule-desc {
+    justify-self: start;    /* alinea el inicio del texto de contenido */
+    text-align: left;
+}
+
+/* Resaltado específico dentro del cronograma (por ejemplo \"Tiempo libre\") */
+.schedule-list li .highlight {
+    display: inline-block;
+    font-size: 1.02rem;
+    font-weight: 600;
+    white-space: nowrap;
+    color: #ffffff;
+}
+
 
 .workshop-block {
     margin-bottom: 1.5rem;
@@ -693,135 +1334,3 @@
     border-radius: 6px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
 }
-
-@media (max-width: 768px) {
-    .event-gallery {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .event-gallery img {
-        height: 190px;
-    }
-}
-
-@media (max-width: 480px) {
-    .event-gallery {
-        grid-template-columns: 1fr;
-    }
-
-    .event-gallery img {
-        height: 210px;
-    }
-}
-
-@media (max-width: 768px) {
-    .event-detail-page {
-        padding: 1rem 0;
-    }
-
-    .event-header {
-        margin-bottom: 1.5rem;
-        padding: 0 1rem;
-    }
-
-    .event-header .event-title {
-        font-size: 2rem;
-    }
-
-    .event-header .event-date {
-        font-size: 1rem;
-    }
-
-    .event-intro-layout {
-        flex-direction: column;
-        gap: 1.5rem;
-        margin: 1.5rem 0;
-        padding: 0 1rem;
-    }
-
-    .event-intro-image {
-        flex: 0 0 auto;
-        width: 100%;
-        max-width: 400px;
-        margin: 0 auto;
-    }
-
-    .event-intro-text h2 {
-        font-size: 1.4rem;
-    }
-
-    .event-content-sections {
-        padding: 0 1rem;
-    }
-
-    .event-section {
-        margin-bottom: 2rem;
-        padding-bottom: 1.5rem;
-    }
-
-    .event-section h2 {
-        font-size: 1.4rem;
-        margin-bottom: 1rem;
-    }
-
-    .event-section p {
-        font-size: 0.95rem;
-        line-height: 1.65;
-    }
-
-    .schedule-block,
-    .workshop-block {
-        padding: 1rem;
-        margin-bottom: 1.2rem;
-    }
-
-    .schedule-block h3 {
-        font-size: 1.05rem;
-    }
-
-    .schedule-list li {
-        font-size: 0.9rem;
-        padding: 0.4rem 0;
-    }
-
-    .schedule-list li strong {
-        min-width: 110px;
-        display: block;
-        margin-bottom: 0.2rem;
-    }
-
-    .workshop-block h3 {
-        font-size: 1.1rem;
-    }
-
-    .workshop-block p {
-        font-size: 0.9rem;
-    }
-
-    .location-section {
-        padding: 1.2rem;
-    }
-
-    .location-info p {
-        font-size: 0.95rem;
-    }
-
-    .contact-info p {
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .event-header .event-title {
-        font-size: 1.7rem;
-    }
-
-    .event-section h2 {
-        font-size: 1.3rem;
-    }
-
-    .schedule-block h3,
-    .workshop-block h3 {
-        font-size: 1rem;
-    }
-} 
