@@ -11,7 +11,7 @@
     <link rel="preload" as="image" href="../assets/images/webp/foto_eventos.webp" media="(min-width: 769px)">
     <link rel="preload" as="image" href="../assets/images/mobile/foto_eventos_mobile.webp" media="(max-width: 768px)">
     <link rel="stylesheet" href="../assets/css/common.css">
-    <link rel="stylesheet" href="../assets/css/eventos.css">
+    <link rel="stylesheet" href="../assets/css/eventos.css?v=2">
 </head>
 <body>
     <nav>
@@ -69,11 +69,35 @@
                 </div>
 
                 <div class="event-detail reverse">
-                    <div class="event-ribbon"><span>finalizado</span></div>
-                    <img src="../assets/images/evento_sanxurxo/1.jpeg" alt="Workshop de yoga en San Xurxo" class="event-image">
+                    <div class="event-image event-carousel" data-carousel="sanxurxo">
+                        <img src="../assets/images/evento_sanxurxo/1.jpeg" alt="Workshop de yoga en San Xurxo" class="carousel-slide active">
+                        <img src="../assets/images/evento_sanxurxo/2.jpeg" alt="Workshop de yoga en San Xurxo" class="carousel-slide">
+                        <img src="../assets/images/evento_sanxurxo/3.jpeg" alt="Workshop de yoga en San Xurxo" class="carousel-slide">
+                        <img src="../assets/images/evento_sanxurxo/4.jpeg" alt="Workshop de yoga en San Xurxo" class="carousel-slide">
+                        <img src="../assets/images/evento_sanxurxo/5.jpeg" alt="Workshop de yoga en San Xurxo" class="carousel-slide">
+                        <img src="../assets/images/evento_sanxurxo/6.jpeg" alt="Workshop de yoga en San Xurxo" class="carousel-slide">
+                        <img src="../assets/images/evento_sanxurxo/7.jpeg" alt="Workshop de yoga en San Xurxo" class="carousel-slide">
+                        <img src="../assets/images/evento_sanxurxo/8.jpeg" alt="Workshop de yoga en San Xurxo" class="carousel-slide">
+                        <img src="../assets/images/evento_sanxurxo/9.jpeg" alt="Workshop de yoga en San Xurxo" class="carousel-slide">
+
+                        <button class="carousel-control prev" aria-label="Imagen anterior">&#10094;</button>
+                        <button class="carousel-control next" aria-label="Imagen siguiente">&#10095;</button>
+
+                        <div class="carousel-dots">
+                            <button class="dot active" data-index="0" aria-label="Imagen 1"></button>
+                            <button class="dot" data-index="1" aria-label="Imagen 2"></button>
+                            <button class="dot" data-index="2" aria-label="Imagen 3"></button>
+                            <button class="dot" data-index="3" aria-label="Imagen 4"></button>
+                            <button class="dot" data-index="4" aria-label="Imagen 5"></button>
+                            <button class="dot" data-index="5" aria-label="Imagen 6"></button>
+                            <button class="dot" data-index="6" aria-label="Imagen 7"></button>
+                            <button class="dot" data-index="7" aria-label="Imagen 8"></button>
+                            <button class="dot" data-index="8" aria-label="Imagen 9"></button>
+                        </div>
+                    </div>
                     <div class="event-info">
                         <h2 class="event-title">Workshop en San Xurxo</h2>
-                        <p class="event-date">San Xurxo · Galicia</p>
+                        <p class="event-date">San Xurxo · Galicia · 15–17 mayo 2026</p>
                         <p class="event-description">
                             Encuentro especial de práctica donde trabajamos alineación, respiración y biomecánica aplicada
                             al movimiento, en un formato cercano y para grupos reducidos.
@@ -86,7 +110,7 @@
 
                 <!-- Ejemplo de evento con imagen -->
                 <div class="event-detail">
-                    <div class="event-ribbon"><span>finalizado</span></div>
+                    <div class="event-ribbon event-ribbon-right"><span>finalizado</span></div>
                     <img src="../assets/images/foto_marruecos.jpg" alt="Retiro de Yoga en Marruecos" class="event-image">
                     <div class="event-info">
                         <h2 class="event-title">Retiro de Yoga y Surf en Marruecos</h2>
@@ -120,6 +144,6 @@
         </div>
     </footer>
     
-    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/script.js?v=2"></script>
 </body>
 </html> 
