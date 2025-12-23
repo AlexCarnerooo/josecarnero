@@ -155,25 +155,25 @@
 .quote-section {
     text-align: center;
     margin: 6rem auto 3rem;
-    max-width: 800px;
+        max-width: 800px;
     padding: 3rem 2.5rem;
     background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(10px);
-    border-radius: 8px;
+        backdrop-filter: blur(10px);
+        border-radius: 8px;
     position: relative;
     z-index: 2;
-}
+    }
 
 .quote {
     font-size: 1.5rem;
     font-style: italic;
     line-height: 1.6;
     margin-bottom: 1rem;
-    color: rgba(255, 255, 255, 0.95);
-}
+        color: rgba(255, 255, 255, 0.95);
+    }
 
 .quote-author {
-    font-size: 1rem;
+        font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: rgba(255, 255, 255, 0.9);
@@ -191,31 +191,31 @@ nav {
     background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(5px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
+    }
 
 .social-icons {
     display: flex;
     gap: 1.5rem;
     align-items: center;
-}
+    }
 
 .social-icons a {
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.3s ease;
-}
-
+    }
+    
 .social-icons a:hover {
     transform: scale(1.1);
-}
-
+    }
+    
 .social-icons svg {
     width: 24px;
     height: 24px;
     transition: stroke 0.3s ease;
-}
-
+    }
+    
 .social-icons a:hover svg {
     stroke: #ffffff;
 }
@@ -499,19 +499,19 @@ footer {
         padding-right: 1rem;
         padding-bottom: 1rem;
         padding-top: 1rem; /* Mantiene el padding-top del 768px */
-    }
-    
+}
+
     .section-title {
         font-size: 1.8rem;
-    }
-    
+}
+
     .text-section p {
         font-size: 0.9rem;
-    }
-    
+}
+
     .quote {
         font-size: 1.1rem;
-    }
+}
 
     .quote-section {
         padding: 2rem 1.5rem;
