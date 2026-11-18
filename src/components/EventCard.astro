@@ -57,6 +57,9 @@ const d = shortDate(data.start);
     gap: 1.5rem;
     align-content: start;
   }
+  .event-card--compact { grid-template-rows: auto 1fr; }
+  .event-card--compact .event-card__body { grid-template-rows: auto auto auto auto 1fr; }
+  .event-card--compact .event-card__more { align-self: end; }
   .event-card--feature { gap: 2rem; }
   @media (min-width: 960px) {
     .event-card--feature {
