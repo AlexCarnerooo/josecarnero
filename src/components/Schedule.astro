@@ -1,0 +1,109 @@
+---
+import Icon from './Icon.astro';
+import { schedule, studio } from '../data/site';
+
+interface Props {
+  showStudio?: boolean;
+}
+const { showStudio = true } = Astro.props;
+
+const duration = (start: string, end: string) => {
+  const [h1, m1] = start.split(':').map(Number);
+  const [h2, m2] = end.split(':').map(Number);
+  const mins = h2 * 60 + m2 - (h1 * 60 + m1);
+  return mins % 60 === 0 ? `${mins / 60} h` : `${Math.floor(mins / 60)} h ${mins % 60} min`;
+};
+---
+
+<div class="schedule">
+  {schedule.map((d) => (
+    <div class="schedule__day">
+      <h3 class="schedule__name">{d.day}</h3>
+      <ul role="list" class="schedule__slots">
+        {d.slots.map((s) => (
+          <li class="schedule__slot">
+            <span class="schedule__time">
+              <time>{s.start}</time>–<time>{s.end}</time>
+            </span>
+            <span class="schedule__style">{s.style}</span>
+            <span class="schedule__dur">{duration(s.start, s.end)}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+
+  {showStudio && (
+    <div class="schedule__studio">
+      <Icon name="pin" />
+      <div>
+        <p class="schedule__studio-name">{studio.name}</p>
+        <p>{studio.street} · {studio.postalCode} {studio.city}</p>
+        <a class="link-arrow" href={studio.mapsUrl} target="_blank" rel="noopener">
+          Cómo llegar <Icon name="arrow-up-right" />
+        </a>
+      </div>
+    </div>
+  )}
+</div>
+
+<style>
+  .schedule {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid currentColor;
+    border-color: var(--line);
+  }
+  :global(.section--paper) .schedule { border-color: var(--line-ink); }
+
+  .schedule__day {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding-block: 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+  :global(.section--paper) .schedule__day,
+  :global(.section--paper) .schedule__slot + .schedule__slot { border-color: var(--line-ink); }
+
+  @media (min-width: 640px) {
+    .schedule__day { grid-template-columns: 11rem 1fr; align-items: baseline; }
+  }
+  .schedule__name {
+    font-size: var(--fs-xl);
+    font-weight: 350;
+  }
+  .schedule__slot {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1rem;
+    align-items: baseline;
+    padding-block: 0.55rem;
+  }
+  .schedule__slot + .schedule__slot { border-top: 1px dashed var(--line); }
+  .schedule__time {
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    font-size: var(--fs-lg);
+    letter-spacing: 0.01em;
+  }
+  .schedule__style { color: var(--muted); font-size: var(--fs-sm); }
+  :global(.section--paper) .schedule__style,
+  :global(.section--paper) .schedule__dur { color: var(--muted-ink); }
+  .schedule__dur {
+    font-size: var(--fs-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .schedule__studio {
+    display: flex;
+    gap: 1rem;
+    padding-top: 1.75rem;
+    font-size: var(--fs-sm);
+  }
+  .schedule__studio > :global(svg) { flex: none; margin-top: 0.2rem; color: var(--ember); }
+  .schedule__studio-name { font-weight: 600; font-size: var(--fs-base); }
+  .schedule__studio .link-arrow { margin-top: 0.75rem; }
+</style>

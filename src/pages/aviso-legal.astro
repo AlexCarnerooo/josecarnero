@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import { contact, site } from '../data/site';
+const updated = '18 de noviembre de 2026';
+---
+
+<Base title="Aviso legal y privacidad" description="Aviso legal, política de privacidad y cookies de josecarnero.org." overlayHeader={false}>
+  <section class="section section--paper legal">
+    <div class="container">
+      <div class="prose">
+        <p class="eyebrow">Legal</p>
+        <h1 class="h2">Aviso legal y privacidad</h1>
+        <p><small>Última actualización: {updated}</small></p>
+
+        <h2>Titular del sitio</h2>
+        <p>
+          En cumplimiento de la Ley 34/2002, de Servicios de la Sociedad de la Información (LSSI-CE), se informa de que
+          el sitio web <strong>{site.url.replace('https://', '')}</strong> es titularidad de José Carnero, profesor de
+          yoga con actividad en Ferrol (A Coruña). Contacto: <a href={`mailto:${contact.email}`}>{contact.email}</a> ·{" "}
+          <a href={`tel:${contact.phone}`} style="white-space:nowrap">{contact.phoneDisplay}</a>.
+        </p>
+
+        <h2>Uso del sitio</h2>
+        <p>
+          Este sitio tiene carácter informativo sobre clases, talleres y retiros de yoga. Los textos y fotografías son
+          propiedad de su titular o se usan con autorización; no está permitida su reproducción sin consentimiento.
+        </p>
+
+        <h2>Privacidad</h2>
+        <p>
+          Este sitio no utiliza formularios ni recoge datos personales de forma directa. Si contactas por email, teléfono,
+          WhatsApp o Instagram, tus datos se usarán únicamente para responderte y gestionar tu reserva, y no se cederán a
+          terceros. Puedes ejercer tus derechos de acceso, rectificación y supresión escribiendo a{" "}
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>.
+        </p>
+        <p>
+          Al usar los enlaces a WhatsApp, Instagram o Google Maps saldrás de este sitio y se aplicarán las políticas de
+          privacidad de esos servicios.
+        </p>
+
+        <h2>Cookies</h2>
+        <p>
+          Este sitio <strong>no utiliza cookies</strong> ni herramientas de analítica o seguimiento. Las tipografías se
+          sirven desde el propio dominio, sin conexiones a servicios de terceros.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .legal { padding-top: calc(var(--header-h) + var(--section) * 0.6); }
+  .legal .prose { margin-inline: auto; color: #3d342a; }
+  .legal :global(h1), .legal :global(h2) { color: var(--ink); }
+  .legal a { color: #b5612a; }
+</style>

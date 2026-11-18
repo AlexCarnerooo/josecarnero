@@ -1,0 +1,120 @@
+---
+import { Picture } from 'astro:assets';
+import Icon from './Icon.astro';
+import { formatRange, isUpcoming, shortDate, type EventEntry } from '../lib/events';
+
+interface Props {
+  event: EventEntry;
+  variant?: 'feature' | 'compact';
+}
+const { event, variant = 'compact' } = Astro.props;
+const { data } = event;
+const upcoming = isUpcoming(event);
+const href = `/eventos/${event.id}/`;
+const d = shortDate(data.start);
+---
+
+<article class:list={['event-card', `event-card--${variant}`, { 'is-past': !upcoming }]} data-reveal>
+  <a href={href} class="event-card__media media" tabindex="-1" aria-hidden="true">
+    <Picture
+      src={data.cover}
+      alt=""
+      formats={['avif', 'webp']}
+      widths={variant === 'feature' ? [480, 800, 1200, 1600] : [400, 640, 900]}
+      sizes={variant === 'feature' ? '(min-width: 960px) 55vw, 100vw' : '(min-width: 960px) 33vw, (min-width: 640px) 50vw, 100vw'}
+      quality={70}
+    />
+    <span class="event-card__date" aria-hidden="true">
+      <span class="event-card__day">{d.day}</span>
+      <span class="event-card__month">{d.month} {d.year}</span>
+    </span>
+  </a>
+  <div class="event-card__body">
+    <div class="event-card__tags">
+      {upcoming ? <span class="tag tag--live">Próximo</span> : <span class="tag">Finalizado</span>}
+      <span class="tag">{data.kind}</span>
+    </div>
+    <h3 class="event-card__title">
+      <a href={href}>{data.title}</a>
+    </h3>
+    <p class="event-card__meta">
+      <Icon name="calendar" size={16} /> {formatRange(data.start, data.end)}
+    </p>
+    <p class="event-card__meta">
+      <Icon name="pin" size={16} /> {data.place} · {data.city}
+    </p>
+    {variant === 'feature' && <p class="event-card__summary">{data.summary}</p>}
+    <span class="link-arrow event-card__more" aria-hidden="true">
+      {upcoming ? 'Ver detalles' : 'Ver cómo fue'} <Icon name="arrow" />
+    </span>
+  </div>
+</article>
+
+<style>
+  .event-card {
+    position: relative;
+    display: grid;
+    gap: 1.5rem;
+    align-content: start;
+  }
+  .event-card--feature { gap: 2rem; }
+  @media (min-width: 960px) {
+    .event-card--feature {
+      grid-template-columns: 1.25fr 1fr;
+      align-items: center;
+      gap: clamp(2rem, 5vw, 5rem);
+    }
+  }
+  .event-card__media {
+    display: block;
+    aspect-ratio: 4 / 3;
+  }
+  .event-card--feature .event-card__media { aspect-ratio: 5 / 4; }
+  .event-card__media :global(img) {
+    transition: transform 1.2s var(--ease), filter 0.6s var(--ease);
+  }
+  .event-card:hover .event-card__media :global(img) { transform: scale(1.04); }
+  .event-card.is-past .event-card__media :global(img) { filter: saturate(0.75); }
+
+  .event-card__date {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: grid;
+    place-items: center;
+    min-width: 4.25rem;
+    padding: 0.6rem 0.7rem 0.5rem;
+    background: rgb(19 16 13 / 0.78);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: var(--radius);
+    line-height: 1;
+    text-align: center;
+  }
+  .event-card__day { font-family: var(--ff-display); font-size: 1.9rem; font-weight: 350; }
+  .event-card__month {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-top: 0.35rem;
+  }
+
+  .event-card__body { display: grid; gap: 0.6rem; justify-items: start; }
+  .event-card__tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.4rem; }
+  .event-card__title { font-size: var(--fs-xl); font-weight: 350; }
+  .event-card--feature .event-card__title { font-size: var(--fs-2xl); }
+  .event-card__title a { text-decoration: none; }
+  .event-card__title a::after { content: ''; position: absolute; inset: 0; }
+  .event-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: var(--fs-sm);
+    color: var(--sand);
+  }
+  .event-card__meta :global(svg) { color: var(--ember); flex: none; }
+  .event-card__summary { color: var(--sand); margin-top: 0.6rem; max-width: 52ch; }
+  .event-card__more { margin-top: 1rem; }
+  .event-card:hover .event-card__more :global(svg) { transform: translateX(4px); }
+</style>

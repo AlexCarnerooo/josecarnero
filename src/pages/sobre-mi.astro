@@ -1,0 +1,225 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { credentials, teachers, studio } from '../data/site';
+
+import heroImg from '../assets/photos/apertura-cadera.webp';
+import sideImg from '../assets/photos/pino.webp';
+
+const path = [
+  {
+    title: 'Artes marciales',
+    text: 'Mi experiencia previa en artes marciales me permitió desarrollar una conexión profunda entre cuerpo y mente, lo que me llevó a encontrar en el yoga el camino perfecto para seguir creciendo.',
+  },
+  {
+    title: 'De Vinyasa a Mysore',
+    text: 'Tras dejar la competición, empecé a tomar clases regulares de Vinyasa basadas en secuencias de Ashtanga. Me enganché y pasé a practicar Ashtanga Mysore a diario.',
+  },
+  {
+    title: 'El primer taller de Rocket',
+    text: 'Poco después, tuve la oportunidad de asistir a mi primer taller de Rocket en mi ciudad, y ese fue el comienzo de un período dedicado a la práctica y formación como profesor.',
+  },
+  {
+    title: 'Formación',
+    text: 'RYT 200H, 50H Biomecánica y Ajustes y 250H Rocket con profesores como Ricardo Martín, Darvina Plante, Manu Oria y David Cabezas.',
+  },
+  {
+    title: 'Rocket Nivel 2 · Milán, 2025',
+    text: 'Rocket Nivel 2 con David Kyle en Milán (2025).',
+  },
+  {
+    title: 'Hoy',
+    text: `Actualmente continúo estudiando Biomecánica y Anatomía del Yoga con Angelo Cecchi. Continúo practicando seis días a la semana, además de impartir clases regulares de Ashtanga y Rocket en el estudio ${studio.name} y realizar talleres allí donde se me solicita.`,
+  },
+];
+---
+
+<Base
+  title="Sobre mí"
+  description="José Carnero, bombero y profesor de Ashtanga y Rocket Yoga en Ferrol. Formación en Rocket Nivel 2, biomecánica y ajustes con maestros internacionales."
+  image={heroImg}
+>
+  <PageHero
+    eyebrow="Sobre mí"
+    title="Un camino que empezó <em>en el cuerpo</em>"
+    image={heroImg}
+    alt="José Carnero en una apertura de cadera profunda sobre la arena"
+    position="50% 55%"
+  />
+
+  <section class="section section--paper">
+    <div class="container story">
+      <div class="story__lead" data-reveal>
+        <p class="story__big">
+          Soy José Carnero, bombero de profesión y <em>sadhaka</em> —practicante de yoga— como estilo de vida.
+        </p>
+      </div>
+      <div class="prose story__body" data-reveal style="--reveal-delay:.1s">
+        <p>
+          Mi camino en el yoga comienza porque estábamos predestinados a encontrarnos. Debido a malas gestiones emocionales
+          que se estaban expresando en mi cuerpo, decidí probar una clase de yoga, algo que desde ese momento nunca más
+          dejaría de practicar.
+        </p>
+        <p>
+          Llevando unos años de práctica continua, decidí salir de ese estancamiento y aumentar mi crecimiento interno con una
+          formación de profesor. Ahí comienza mi camino de compartir el yoga, que he ido complementando con otras
+          formaciones y certificaciones, además de retiros y workshops en <em>Rocket Vinyasa</em>,{" "}
+          <em>Ashtanga Vinyasa</em>, Biomecánica y Pranayama, con maestros internacionales como Ty Landrum, Petri Räisänen,
+          Tarik Van Prehn y Ricardo Martín.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section journey" aria-labelledby="camino-title">
+    <div class="container journey__grid">
+      <div class="journey__aside">
+        <header class="journey__head" data-reveal>
+          <p class="eyebrow">Trayectoria</p>
+          <h2 id="camino-title" class="h2">El <span class="accent">camino</span></h2>
+        </header>
+        <div class="journey__media media" data-reveal>
+          <Picture
+            src={sideImg}
+            alt="Pino sobre las manos en la playa"
+            formats={['avif', 'webp']}
+            widths={[400, 700, 1000]}
+            sizes="(min-width: 960px) 35vw, 100vw"
+            quality={70}
+          />
+        </div>
+      </div>
+
+      <ol role="list" class="timeline">
+        {path.map((step, i) => (
+          <li class="timeline__item" data-reveal>
+            <span class="timeline__num">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3 class="timeline__title">{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--ink-2" aria-labelledby="enfoque-title">
+    <div class="container approach">
+      <div data-reveal>
+        <p class="eyebrow">Enfoque</p>
+        <h2 id="enfoque-title" class="h2">Alineación, prana <span class="accent">y biomecánica</span></h2>
+      </div>
+      <div class="approach__body" data-reveal style="--reveal-delay:.1s">
+        <p class="lead">
+          Mi enfoque de la práctica y de la enseñanza se basa en la alineación, el movimiento del prana a través de la
+          respiración y la biomecánica.
+        </p>
+        <ul role="list" class="approach__creds">
+          {credentials.map((c) => (
+            <li><strong>{c.title}</strong><span>{c.detail}</span></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="maestros-title">
+    <div class="container teachers">
+      <div data-reveal>
+        <p class="eyebrow">Aprendiendo de</p>
+        <h2 id="maestros-title" class="h2">Maestros <span class="accent">excepcionales</span></h2>
+      </div>
+      <ul role="list" class="teachers__list" data-reveal>
+        {teachers.map((t) => <li>{t}</li>)}
+      </ul>
+      <div class="actions teachers__cta" data-reveal>
+        <a class="btn" href="/clases/">Practica conmigo <Icon name="arrow" /></a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .story { display: grid; gap: 2.5rem; }
+  @media (min-width: 960px) {
+    .story { grid-template-columns: 1fr 1fr; gap: clamp(3rem, 7vw, 7rem); align-items: start; }
+  }
+  .story__big {
+    font-family: var(--ff-display);
+    font-size: var(--fs-2xl);
+    font-weight: 300;
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+  }
+  .story__big em { color: #b5612a; }
+  .story__body { color: var(--muted-ink); font-size: var(--fs-lg); }
+
+  .journey__grid { display: grid; gap: 3rem; }
+  @media (min-width: 960px) {
+    .journey__grid { grid-template-columns: 0.85fr 1.15fr; gap: clamp(3rem, 7vw, 7rem); }
+    .journey__aside { position: sticky; top: calc(var(--header-h) + 2rem); align-self: start; }
+  }
+  .journey__head { display: grid; gap: 1rem; margin-bottom: 2.5rem; }
+  .journey__media { aspect-ratio: 3 / 4; max-height: 70vh; }
+  @media (max-width: 959px) { .journey__media { display: none; } }
+
+  .timeline { position: relative; display: grid; }
+  .timeline__item {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 1rem;
+    padding-block: 1.75rem;
+    border-top: 1px solid var(--line);
+  }
+  .timeline__item:last-child { border-bottom: 1px solid var(--line); }
+  .timeline__num {
+    font-size: var(--fs-xs);
+    letter-spacing: 0.16em;
+    color: var(--ember);
+    padding-top: 0.5rem;
+  }
+  .timeline__title { font-size: var(--fs-xl); font-weight: 350; margin-bottom: 0.6rem; }
+  .timeline__item p { color: var(--sand); max-width: 52ch; }
+
+  .approach { display: grid; gap: 2rem; }
+  @media (min-width: 960px) {
+    .approach { grid-template-columns: 1fr 1.2fr; gap: clamp(3rem, 7vw, 7rem); }
+  }
+  .approach > div:first-child { display: grid; gap: 1rem; align-content: start; }
+  .approach__creds {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .approach__creds li {
+    display: grid;
+    gap: 0.3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+  .approach__creds strong { font-family: var(--ff-display); font-weight: 450; font-size: var(--fs-lg); }
+  .approach__creds span { color: var(--muted); font-size: var(--fs-sm); }
+
+  .teachers { display: grid; gap: 2.5rem; }
+  .teachers > div:first-child { display: grid; gap: 1rem; }
+  .teachers__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4em 0.9em;
+    font-family: var(--ff-display);
+    font-size: var(--fs-2xl);
+    font-weight: 300;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+  }
+  .teachers__list li:not(:last-child)::after {
+    content: '·';
+    margin-left: 0.9em;
+    color: var(--ember);
+  }
+  .teachers__cta { margin-top: 1rem; }
+</style>

@@ -1,0 +1,428 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Schedule from '../components/Schedule.astro';
+import EventCard from '../components/EventCard.astro';
+import { contact, credentials, studio } from '../data/site';
+import { getEvents } from '../lib/events';
+
+import heroImg from '../assets/photos/atardecer-guerrero.webp';
+import ashtangaImg from '../assets/photos/pino.webp';
+import rocketImg from '../assets/photos/equilibrio-brazos.webp';
+import aboutImg from '../assets/photos/media-luna-invertida.webp';
+import quoteImg from '../assets/photos/hanumanasana.webp';
+
+const { upcoming, past } = await getEvents();
+const featured = upcoming[0];
+const others = featured ? [...upcoming.slice(1), ...past].slice(0, 3) : past.slice(0, 3);
+---
+
+<Base>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__media fill">
+      <Picture
+        src={heroImg}
+        alt="José Carnero en una postura de guerrero invertido frente al mar al atardecer"
+        formats={['avif', 'webp']}
+        layout="full-width"
+        loading="eager"
+        fetchpriority="high"
+        quality={68}
+      />
+    </div>
+    <div class="container hero__content">
+      <p class="eyebrow hero__eyebrow">Yoga en {studio.city} · Galicia</p>
+      <h1 class="hero__title">
+        <span class="hero__line">José</span>
+        <span class="hero__line hero__line--indent">Carnero</span>
+      </h1>
+      <div class="hero__foot">
+        <p class="hero__lead">
+          Ashtanga &amp; Rocket Yoga.<br />
+          Alineación, respiración y biomecánica.
+        </p>
+        <div class="actions">
+          <a class="btn" href="/clases/">Horarios de clases <Icon name="arrow" /></a>
+          <a class="btn btn--ghost" href="/eventos/">Talleres y retiros</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero__scroll" aria-hidden="true"><span></span></div>
+  </section>
+
+  <!-- MANIFIESTO -->
+  <section class="section section--paper intro">
+    <div class="container intro__grid">
+      <p class="eyebrow" data-reveal>Mi enfoque</p>
+      <div>
+        <p class="intro__statement" data-reveal>
+          Una práctica basada en la <em>alineación</em>, el movimiento del <em>prana</em> a través de la respiración y la{" "}
+          <em>biomecánica</em>, para que el yoga sea sostenible y te acompañe toda la vida.
+        </p>
+        <ul role="list" class="credentials" data-reveal>
+          {credentials.map((c) => (
+            <li>
+              <span class="credentials__title">{c.title}</span>
+              <span class="credentials__detail">{c.detail}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESTILOS -->
+  <section class="section styles" aria-labelledby="estilos-title">
+    <div class="container">
+      <header class="section-head" data-reveal>
+        <p class="eyebrow">Lo que enseño</p>
+        <h2 id="estilos-title" class="h2">Dos métodos, <span class="accent">una misma raíz</span></h2>
+      </header>
+
+      <div class="styles__grid">
+        <article class="style-card" data-reveal>
+          <div class="style-card__media media">
+            <Picture
+              src={ashtangaImg}
+              alt="Pino sobre las manos en la arena con el mar de fondo"
+              formats={['avif', 'webp']}
+              widths={[400, 700, 1000]}
+              sizes="(min-width: 900px) 40vw, 100vw"
+              quality={70}
+            />
+          </div>
+          <span class="style-card__num">01</span>
+          <h3 class="h3">Ashtanga Vinyasa</h3>
+          <p>
+            El método tradicional: una serie fija de posturas encadenadas con la respiración. Disciplina, constancia y
+            atención para conocer el cuerpo desde dentro, práctica a práctica.
+          </p>
+        </article>
+
+        <article class="style-card style-card--offset" data-reveal style="--reveal-delay:.12s">
+          <div class="style-card__media media">
+            <Picture
+              src={rocketImg}
+              alt="Equilibrio sobre brazos en la playa al atardecer"
+              formats={['avif', 'webp']}
+              widths={[400, 700, 1000]}
+              sizes="(min-width: 900px) 40vw, 100vw"
+              quality={70}
+            />
+          </div>
+          <span class="style-card__num">02</span>
+          <h3 class="h3">Rocket Yoga</h3>
+          <p>
+            Creado por Larry Schultz, discípulo de Pattabhi Jois. Nace del Ashtanga con una propuesta más creativa,
+            accesible y desafiante: fuerza, invertidas y libertad de movimiento.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLASES -->
+  <section class="section section--ink-2 classes" aria-labelledby="clases-title">
+    <div class="container classes__grid">
+      <div class="classes__intro" data-reveal>
+        <p class="eyebrow">Clases regulares</p>
+        <h2 id="clases-title" class="h2">Practica cada semana en <span class="accent">{studio.city}</span></h2>
+        <p class="lead">
+          Clases de Ashtanga en el estudio {studio.name}, por la mañana temprano o al final del día. Escríbeme y te
+          cuento cómo empezar.
+        </p>
+        <div class="actions">
+          <a class="btn" href={contact.whatsapp()} target="_blank" rel="noopener"><Icon name="whatsapp" /> Reservar clase</a>
+          <a class="btn btn--ghost" href="/clases/">Horarios y estudio</a>
+        </div>
+      </div>
+      <div data-reveal style="--reveal-delay:.1s">
+        <Schedule />
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTOS -->
+  <section class="section events" aria-labelledby="eventos-title">
+    <div class="container">
+      <header class="section-head section-head--row" data-reveal>
+        <div>
+          <p class="eyebrow">Talleres y retiros</p>
+          <h2 id="eventos-title" class="h2">{featured ? 'Próximos encuentros' : 'Experiencias compartidas'}</h2>
+        </div>
+        <a class="link-arrow" href="/eventos/">Todos los eventos <Icon name="arrow" /></a>
+      </header>
+
+      {featured ? (
+        <EventCard event={featured} variant="feature" />
+      ) : (
+        <div class="events__empty" data-reveal>
+          <p>
+            Ahora mismo no hay nuevas fechas publicadas. Los próximos talleres y retiros se anuncian primero en
+            Instagram.
+          </p>
+          <a class="btn btn--ghost" href={contact.instagramUrl} target="_blank" rel="noopener">
+            <Icon name="instagram" /> @{contact.instagram}
+          </a>
+        </div>
+      )}
+
+      {others.length > 0 && (
+        <div class="events__grid">
+          {others.map((e) => <EventCard event={e} />)}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- SOBRE MÍ -->
+  <section class="section section--paper about" aria-labelledby="about-title">
+    <div class="container about__grid">
+      <div class="about__media media" data-reveal>
+        <Picture
+          src={aboutImg}
+          alt="José Carnero en media luna invertida sobre la arena"
+          formats={['avif', 'webp']}
+          widths={[400, 700, 1000, 1400]}
+          sizes="(min-width: 900px) 50vw, 100vw"
+          quality={70}
+        />
+      </div>
+      <div class="about__text" data-reveal style="--reveal-delay:.1s">
+        <p class="eyebrow">Sobre mí</p>
+        <h2 id="about-title" class="h2">De las artes marciales <span class="accent">a la esterilla</span></h2>
+        <p>
+          Soy José Carnero, bombero de profesión y <em>sadhaka</em> o practicante de yoga como estilo de vida. Debido a
+          malas gestiones emocionales que se estaban expresando en mi cuerpo, decidí probar una clase de yoga, algo que
+          desde ese momento nunca más dejaría de practicar.
+        </p>
+        <p>
+          Después de practicar <em>Vinyasa</em> durante un tiempo y de haber probado <em>Yin Yoga</em> y <em>Hatha</em>,
+          encontré mi encaje en el <em>Ashtanga Vinyasa</em> y posteriormente en el <em>Rocket Vinyasa</em>.
+        </p>
+        <a class="link-arrow" href="/sobre-mi/">Conoce mi camino <Icon name="arrow" /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CITA -->
+  <section class="quote" aria-label="Cita">
+    <div class="quote__media fill">
+      <Picture src={quoteImg} alt="" formats={['avif', 'webp']} layout="full-width" quality={60} />
+    </div>
+    <figure class="container quote__content" data-reveal>
+      <blockquote>
+        <p>
+          «Yoga is like music: the rhythm of the body, the melody of the mind, and the harmony of the soul create the
+          symphony of life.»
+        </p>
+      </blockquote>
+      <figcaption>B.K.S. Iyengar</figcaption>
+    </figure>
+  </section>
+</Base>
+
+<style>
+  /* Hero ------------------------------------------------------------- */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: flex-end;
+    padding-top: var(--header-h);
+    padding-bottom: clamp(2.5rem, 2rem + 4vw, 5rem);
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .hero__media { position: absolute; inset: 0; z-index: -1; }
+  .hero__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 62% 50%;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__media :global(img) { animation: hero-zoom 2.4s var(--ease) both; }
+    .hero__content > * { animation: rise 1.2s var(--ease) both; }
+    .hero__title { animation-delay: 0.15s !important; }
+    .hero__foot { animation-delay: 0.35s !important; }
+  }
+  @keyframes hero-zoom { from { transform: scale(1.08); } to { transform: none; } }
+  @keyframes rise { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+
+  .hero__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgb(19 16 13 / 0.92) 0%, rgb(19 16 13 / 0.35) 45%, rgb(19 16 13 / 0) 70%),
+      linear-gradient(to bottom, rgb(19 16 13 / 0.5) 0%, rgb(19 16 13 / 0) 22%);
+  }
+  .hero__content { display: grid; gap: clamp(1rem, 2vw, 1.5rem); }
+  .hero__eyebrow { color: var(--sand); }
+  .hero__title {
+    font-size: var(--fs-hero);
+    font-weight: 250;
+    line-height: 0.88;
+    letter-spacing: -0.035em;
+  }
+  .hero__line { display: block; }
+  .hero__line--indent { padding-left: 0.55em; font-style: italic; font-weight: 200; }
+  .hero__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem 3rem;
+    margin-top: clamp(0.5rem, 2vw, 1.5rem);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .hero__lead { font-size: var(--fs-lg); color: var(--sand); line-height: 1.5; }
+
+  .hero__scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 1.25rem;
+    width: 1px;
+    height: 2.5rem;
+    background: var(--line);
+    overflow: hidden;
+    display: none;
+  }
+  @media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+    .hero__scroll { display: block; }
+  }
+  .hero__scroll span {
+    position: absolute;
+    inset: 0;
+    background: var(--paper);
+    animation: scroll-cue 2.2s var(--ease) infinite;
+  }
+  @keyframes scroll-cue { from { transform: translateY(-100%); } to { transform: translateY(100%); } }
+
+  /* Intro -------------------------------------------------------------- */
+  .intro__grid { display: grid; gap: 2rem; }
+  @media (min-width: 900px) {
+    .intro__grid { grid-template-columns: 14rem 1fr; gap: 3rem; }
+    .intro__grid > .eyebrow { padding-top: 1rem; }
+  }
+  .intro__statement {
+    font-family: var(--ff-display);
+    font-size: var(--fs-2xl);
+    font-weight: 300;
+    line-height: 1.22;
+    letter-spacing: -0.015em;
+    max-width: 30ch;
+  }
+  .intro__statement em { color: #b5612a; }
+  .credentials {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: 1.5rem 2rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding-top: 2rem;
+    border-top: 1px solid var(--line-ink);
+  }
+  .credentials li { display: grid; gap: 0.3rem; }
+  .credentials__title { font-family: var(--ff-display); font-size: var(--fs-lg); font-weight: 450; }
+  .credentials__detail { font-size: var(--fs-sm); color: var(--muted-ink); line-height: 1.5; }
+
+  /* Section head ----------------------------------------------------- */
+  .section-head { display: grid; gap: 1rem; margin-bottom: clamp(2.5rem, 5vw, 4.5rem); }
+  .section-head--row {
+    grid-template-columns: 1fr;
+    align-items: end;
+  }
+  @media (min-width: 720px) {
+    .section-head--row { grid-template-columns: 1fr auto; }
+  }
+  .section-head--row > div { display: grid; gap: 1rem; }
+
+  /* Estilos ------------------------------------------------------------ */
+  .styles__grid {
+    display: grid;
+    gap: 4rem;
+  }
+  @media (min-width: 900px) {
+    .styles__grid { grid-template-columns: 1fr 1fr; gap: clamp(3rem, 6vw, 7rem); }
+    .style-card--offset { margin-top: 8rem; }
+  }
+  .style-card { display: grid; gap: 1rem; align-content: start; }
+  .style-card__media { aspect-ratio: 4 / 5; margin-bottom: 1rem; }
+  .style-card__num {
+    font-size: var(--fs-xs);
+    letter-spacing: 0.2em;
+    color: var(--ember);
+  }
+  .style-card p { color: var(--sand); max-width: 48ch; }
+
+  /* Clases -------------------------------------------------------------- */
+  .classes__grid { display: grid; gap: 3rem; }
+  @media (min-width: 960px) {
+    .classes__grid { grid-template-columns: 1fr 1.1fr; gap: clamp(3rem, 7vw, 8rem); align-items: start; }
+  }
+  .classes__intro { display: grid; gap: 1.25rem; justify-items: start; }
+  .classes__intro .actions { margin-top: 0.75rem; }
+
+  /* Eventos ------------------------------------------------------------- */
+  .events__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 3rem 2rem;
+    margin-top: clamp(3rem, 6vw, 5rem);
+  }
+  .events__empty {
+    display: grid;
+    gap: 1.5rem;
+    justify-items: start;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    max-width: 52rem;
+  }
+  .events__empty p { font-size: var(--fs-lg); color: var(--sand); max-width: 48ch; }
+
+  /* Sobre mí ------------------------------------------------------------ */
+  .about__grid { display: grid; gap: 3rem; align-items: center; }
+  @media (min-width: 900px) {
+    .about__grid { grid-template-columns: 1fr 1fr; gap: clamp(3rem, 7vw, 7rem); }
+  }
+  .about__media { aspect-ratio: 4 / 5; }
+  .about__media :global(img) { object-position: 50% 60%; }
+  .about__text { display: grid; gap: 1.25rem; justify-items: start; }
+  .about__text p:not(.eyebrow) { color: var(--muted-ink); max-width: 52ch; }
+  .about__text .link-arrow { margin-top: 0.5rem; }
+
+  /* Cita ---------------------------------------------------------------- */
+  .quote {
+    position: relative;
+    isolation: isolate;
+    min-height: 80svh;
+    display: grid;
+    align-items: center;
+    padding-block: var(--section);
+    overflow: hidden;
+  }
+  .quote__media { position: absolute; inset: 0; z-index: -1; }
+  .quote__media :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+  .quote__media::after { content: ''; position: absolute; inset: 0; background: rgb(19 16 13 / 0.62); }
+  .quote__content { display: grid; gap: 1.5rem; justify-items: center; text-align: center; }
+  .quote blockquote p {
+    font-family: var(--ff-display);
+    font-size: var(--fs-2xl);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.2;
+    max-width: 28ch;
+    margin-inline: auto;
+  }
+  .quote figcaption {
+    font-size: var(--fs-xs);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--sand);
+  }
+</style>

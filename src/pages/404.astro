@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import img from '../assets/photos/media-luna-invertida.webp';
+---
+
+<Base title="Página no encontrada" noindex>
+  <PageHero
+    eyebrow="Error 404"
+    title="Esta página <em>se ha perdido</em>"
+    lead="Puede que el enlace haya cambiado con el nuevo diseño de la web."
+    image={img}
+    alt="Postura de equilibrio sobre la arena"
+  >
+    <div class="actions">
+      <a class="btn" href="/">Volver al inicio <Icon name="arrow" /></a>
+      <a class="btn btn--ghost" href="/clases/">Ver horarios</a>
+    </div>
+  </PageHero>
+</Base>

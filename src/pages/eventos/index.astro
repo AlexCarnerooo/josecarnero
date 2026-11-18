@@ -1,0 +1,88 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import EventCard from '../../components/EventCard.astro';
+import Icon from '../../components/Icon.astro';
+import { contact } from '../../data/site';
+import { getEvents } from '../../lib/events';
+
+import heroImg from '../../assets/photos/equilibrio-brazos.webp';
+
+const { upcoming, past } = await getEvents();
+---
+
+<Base
+  title="Talleres y retiros"
+  description="Workshops de Rocket Yoga, retiros y cursos con José Carnero en Galicia, Canarias y más allá."
+  image={heroImg}
+>
+  <PageHero
+    eyebrow="Eventos"
+    title="Talleres, cursos <em>y retiros</em>"
+    lead="Encuentros para profundizar en la práctica: más tiempo, más técnica y una comunidad con la que compartirlo."
+    image={heroImg}
+    alt="Equilibrio sobre brazos en la playa al atardecer"
+    position="50% 60%"
+  />
+
+  <section class="section" aria-labelledby="proximos-title">
+    <div class="container">
+      <header class="head" data-reveal>
+        <p class="eyebrow">Agenda</p>
+        <h2 id="proximos-title" class="h2">Próximos eventos</h2>
+      </header>
+
+      {upcoming.length ? (
+        <div class="list">
+          {upcoming.map((e) => <EventCard event={e} variant="feature" />)}
+        </div>
+      ) : (
+        <div class="empty" data-reveal>
+          <p>
+            Ahora mismo no hay nuevas fechas publicadas. Las próximas convocatorias se anuncian primero en Instagram;
+            si quieres que te avise, escríbeme.
+          </p>
+          <div class="actions">
+            <a class="btn" href={contact.instagramUrl} target="_blank" rel="noopener"><Icon name="instagram" /> Seguir en Instagram</a>
+            <a class="btn btn--ghost" href={contact.whatsapp('Hola José, avísame cuando haya un nuevo taller o retiro.')} target="_blank" rel="noopener">
+              <Icon name="whatsapp" /> Avísame
+            </a>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  {past.length > 0 && (
+    <section class="section section--ink-2" aria-labelledby="pasados-title">
+      <div class="container">
+        <header class="head" data-reveal>
+          <p class="eyebrow">Archivo</p>
+          <h2 id="pasados-title" class="h2">Encuentros <span class="accent">anteriores</span></h2>
+        </header>
+        <div class="grid">
+          {past.map((e) => <EventCard event={e} />)}
+        </div>
+      </div>
+    </section>
+  )}
+</Base>
+
+<style>
+  .head { display: grid; gap: 1rem; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  .list { display: grid; gap: clamp(4rem, 8vw, 7rem); }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 3.5rem 2rem;
+  }
+  .empty {
+    display: grid;
+    gap: 1.75rem;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    max-width: 52rem;
+  }
+  .empty p { font-size: var(--fs-lg); color: var(--sand); max-width: 50ch; }
+</style>

@@ -1,0 +1,12 @@
+{
+  "name": "José Carnero · Ashtanga & Rocket Yoga",
+  "short_name": "José Carnero",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#13100d",
+  "background_color": "#13100d",
+  "display": "standalone",
+  "start_url": "/"
+}

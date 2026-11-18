@@ -1,0 +1,238 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Gallery from '../../components/Gallery.astro';
+import Icon from '../../components/Icon.astro';
+import { contact, site } from '../../data/site';
+import { formatRange, isUpcoming } from '../../lib/events';
+
+export async function getStaticPaths() {
+  const events = await getCollection('events');
+  return events.map((event) => ({ params: { slug: event.id }, props: { event } }));
+}
+
+const { event } = Astro.props;
+const { data } = event;
+const { Content } = await render(event);
+const upcoming = isUpcoming(event);
+const when = formatRange(data.start, data.end);
+
+const booking = upcoming
+  ? data.booking ?? { label: 'Reservar plaza', url: contact.whatsapp(`Hola José, me interesa «${data.title}» (${when}).`) }
+  : undefined;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: data.title,
+  description: data.summary,
+  startDate: data.start.toISOString().slice(0, 10),
+  endDate: (data.end ?? data.start).toISOString().slice(0, 10),
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  eventStatus: 'https://schema.org/EventScheduled',
+  location: { '@type': 'Place', name: data.place, address: data.address ?? data.city },
+  performer: { '@id': `${site.url}/#jose` },
+  organizer: { '@id': `${site.url}/#jose` },
+  url: new URL(`/eventos/${event.id}/`, site.url).href,
+};
+---
+
+<Base title={data.title} description={data.summary} image={data.cover} jsonLd={jsonLd}>
+  <PageHero eyebrow={data.kind} title={data.title} image={data.cover} alt={data.coverAlt}>
+    <div class="facts">
+      {upcoming ? <span class="tag tag--live">Próximo</span> : <span class="tag">Finalizado</span>}
+      <span class="fact"><Icon name="calendar" size={18} /> {when}</span>
+      <span class="fact"><Icon name="pin" size={18} /> {data.place} · {data.city}</span>
+    </div>
+    {booking && (
+      <div class="actions">
+        <a class="btn" href={booking.url} target="_blank" rel="noopener">{booking.label} <Icon name="arrow" /></a>
+      </div>
+    )}
+  </PageHero>
+
+  {!upcoming && (
+    <div class="notice">
+      <div class="container">
+        <p>
+          Este evento ya se celebró. ¿Quieres enterarte del próximo?{" "}
+          <a href={contact.instagramUrl} target="_blank" rel="noopener">Sígueme en Instagram</a> o{" "}
+          <a href={contact.whatsapp('Hola José, avísame cuando haya un nuevo taller o retiro.')} target="_blank" rel="noopener">escríbeme</a>.
+        </p>
+      </div>
+    </div>
+  )}
+
+  <section class="section section--paper">
+    <div class="container detail">
+      <article class="prose detail__body" data-reveal>
+        <Content />
+      </article>
+
+      <aside class="detail__aside" data-reveal style="--reveal-delay:.1s">
+        {data.includes.length > 0 && (
+          <div class="panel">
+            <h2 class="panel__title">Qué incluye</h2>
+            <ul role="list" class="pills">
+              {data.includes.map((i) => <li>{i}</li>)}
+            </ul>
+          </div>
+        )}
+
+        {upcoming && data.prices.length > 0 && (
+          <div class="panel">
+            <h2 class="panel__title">Precio</h2>
+            <dl class="prices">
+              {data.prices.map((p) => (
+                <div>
+                  <dt>{p.label}</dt>
+                  <dd>{p.price}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        )}
+
+        <div class="panel">
+          <h2 class="panel__title">Lugar</h2>
+          <p><strong>{data.place}</strong><br />{data.address ?? data.city}</p>
+        </div>
+
+        {data.contacts.length > 0 && (
+          <div class="panel">
+            <h2 class="panel__title">Información y reservas</h2>
+            <ul role="list" class="contacts">
+              {data.contacts.map((c) => (
+                <li>
+                  <span>{c.label}</span>
+                  {c.url ? <a href={c.url} target="_blank" rel="noopener">{c.value}</a> : <span>{c.value}</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {data.links.length > 0 && (
+          <div class="panel">
+            <h2 class="panel__title">Material</h2>
+            <ul role="list" class="contacts">
+              {data.links.map((l) => (
+                <li>
+                  <a class="link-arrow" href={l.url} target="_blank" rel="noopener">
+                    {l.label} <Icon name="arrow-up-right" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </aside>
+    </div>
+  </section>
+
+  {data.agenda.length > 0 && (
+    <section class="section" aria-labelledby="agenda-title">
+      <div class="container">
+        <header class="head" data-reveal>
+          <p class="eyebrow">Programa</p>
+          <h2 id="agenda-title" class="h2">Agenda</h2>
+        </header>
+        <div class="agenda">
+          {data.agenda.map((block, i) => (
+            <div class="agenda__day" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
+              <h3 class="agenda__title">{block.day}</h3>
+              <ol role="list">
+                {block.items.map((it) => (
+                  <li><time>{it.time}</time><span>{it.text}</span></li>
+                ))}
+              </ol>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {data.gallery.length > 0 && (
+    <section class="section section--ink-2" aria-labelledby="galeria-title">
+      <div class="container">
+        <header class="head" data-reveal>
+          <p class="eyebrow">Dossier</p>
+          <h2 id="galeria-title" class="h2">Imágenes</h2>
+        </header>
+        <Gallery images={data.gallery} />
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="container back">
+      <a class="link-arrow" href="/eventos/"><Icon name="chevron-left" /> Volver a eventos</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .facts { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.5rem; color: var(--sand); }
+  .fact { display: inline-flex; align-items: center; gap: 0.5rem; font-size: var(--fs-sm); }
+  .fact :global(svg) { color: var(--ember); }
+
+  .notice { background: var(--ink-2); border-block: 1px solid var(--line); padding-block: 1.1rem; font-size: var(--fs-sm); color: var(--sand); }
+  .notice a { color: var(--ember-soft); }
+
+  .detail { display: grid; gap: 3rem; }
+  @media (min-width: 1000px) {
+    .detail { grid-template-columns: 1.4fr 1fr; gap: clamp(3rem, 6vw, 6rem); align-items: start; }
+    .detail__aside { position: sticky; top: calc(var(--header-h) + 1.5rem); }
+  }
+  .detail__body { font-size: var(--fs-lg); color: #3d342a; }
+  .detail__body :global(h2), .detail__body :global(h3) { color: var(--ink); }
+  .detail__body :global(a) { color: #b5612a; }
+  .detail__body :global(li::marker) { color: #b5612a; }
+
+  .detail__aside { display: grid; gap: 1rem; }
+  .panel {
+    padding: 1.5rem;
+    background: var(--paper-2);
+    border-radius: var(--radius);
+    font-size: var(--fs-sm);
+  }
+  .panel__title {
+    font-family: var(--ff-body);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted-ink);
+    margin-bottom: 1rem;
+  }
+  .pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .pills li { padding: 0.35em 0.85em; border: 1px solid var(--line-ink); border-radius: 999px; }
+  .prices div { display: flex; justify-content: space-between; gap: 1rem; padding-block: 0.6rem; }
+  .prices div + div { border-top: 1px solid var(--line-ink); }
+  .prices dd { font-family: var(--ff-display); font-size: var(--fs-xl); line-height: 1; }
+  .contacts li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.25rem 1rem; padding-block: 0.4rem; }
+  .contacts a { color: #b5612a; font-weight: 500; }
+
+  .head { display: grid; gap: 1rem; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+  .agenda {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 2.5rem 2rem;
+  }
+  .agenda__day { padding-top: 1.25rem; border-top: 1px solid var(--ember); }
+  .agenda__title { font-size: var(--fs-xl); font-weight: 350; margin-bottom: 1.25rem; }
+  .agenda li {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    gap: 1rem;
+    padding-block: 0.65rem;
+    border-bottom: 1px solid var(--line);
+    font-size: var(--fs-sm);
+  }
+  .agenda time { font-variant-numeric: tabular-nums; font-weight: 500; color: var(--ember-soft); }
+  .agenda span { color: var(--sand); }
+
+  .back { display: flex; }
+</style>

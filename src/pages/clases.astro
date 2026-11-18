@@ -1,0 +1,178 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Schedule from '../components/Schedule.astro';
+import Icon from '../components/Icon.astro';
+import { contact, studio, schedule, site } from '../data/site';
+
+import heroImg from '../assets/photos/hanumanasana.webp';
+
+const steps = [
+  { title: 'Escríbeme', text: 'Por WhatsApp o email. Cuéntame si ya practicas o si es tu primera vez.' },
+  { title: 'Reserva tu plaza', text: 'Te explico el formato de la clase y elegimos el horario que mejor te encaje.' },
+  { title: 'Ven a practicar', text: `Nos vemos en ${studio.name}. El resto lo vamos descubriendo en la esterilla.` },
+];
+
+const dayMap: Record<string, string> = { Lunes: 'Monday', Martes: 'Tuesday', Miércoles: 'Wednesday', Jueves: 'Thursday', Viernes: 'Friday', Sábado: 'Saturday', Domingo: 'Sunday' };
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ExerciseGym',
+  name: studio.name,
+  url: `${site.url}/clases/`,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: studio.street,
+    postalCode: studio.postalCode,
+    addressLocality: studio.city,
+    addressRegion: studio.region,
+    addressCountry: 'ES',
+  },
+  hasMap: studio.mapsUrl,
+  employee: { '@id': `${site.url}/#jose` },
+  openingHoursSpecification: schedule.flatMap((d) =>
+    d.slots.map((s) => ({
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: `https://schema.org/${dayMap[d.day]}`,
+      opens: s.start,
+      closes: s.end,
+    })),
+  ),
+};
+---
+
+<Base
+  title="Clases y horarios"
+  description={`Clases de Ashtanga Yoga en Ferrol con José Carnero: lunes y miércoles por la mañana y por la noche en ${studio.name}, ${studio.street}.`}
+  image={heroImg}
+  jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Clases regulares"
+    title="Ashtanga en <em>Ferrol</em>"
+    lead="Clases a primera hora de la mañana o para cerrar el día, con atención a la alineación y a la respiración."
+    image={heroImg}
+    alt="José Carnero en hanumanasana sobre la arena al atardecer"
+    position="50% 45%"
+  >
+    <div class="actions">
+      <a class="btn" href={contact.whatsapp()} target="_blank" rel="noopener"><Icon name="whatsapp" /> Reservar por WhatsApp</a>
+      <a class="btn btn--ghost" href={`mailto:${contact.email}?subject=${encodeURIComponent('Clases de yoga')}`}>
+        <Icon name="mail" /> Escribir un email
+      </a>
+    </div>
+  </PageHero>
+
+  <section class="section section--paper" aria-labelledby="horarios-title">
+    <div class="container timetable">
+      <div class="timetable__head" data-reveal>
+        <p class="eyebrow">Horarios</p>
+        <h2 id="horarios-title" class="h2">Semana tipo</h2>
+        <p class="lead">Escríbeme antes de tu primera clase y te confirmo horario y disponibilidad.</p>
+      </div>
+      <div data-reveal style="--reveal-delay:.1s">
+        <Schedule />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="empezar-title">
+    <div class="container">
+      <header class="steps__head" data-reveal>
+        <p class="eyebrow">Cómo empezar</p>
+        <h2 id="empezar-title" class="h2">Tres pasos <span class="accent">sencillos</span></h2>
+      </header>
+      <ol role="list" class="steps">
+        {steps.map((s, i) => (
+          <li class="step" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
+            <span class="step__num">{i + 1}</span>
+            <h3 class="h3">{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--ink-2" aria-labelledby="estudio-title">
+    <div class="container studio">
+      <div data-reveal>
+        <p class="eyebrow">El estudio</p>
+        <h2 id="estudio-title" class="h2">{studio.name}</h2>
+      </div>
+      <div class="studio__info" data-reveal style="--reveal-delay:.1s">
+        <address>
+          <Icon name="pin" size={22} />
+          <span>{studio.street}<br />{studio.postalCode} {studio.city}, {studio.region}</span>
+        </address>
+        <a class="btn btn--ghost" href={studio.mapsUrl} target="_blank" rel="noopener">
+          Abrir en Google Maps <Icon name="arrow-up-right" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="talleres-title">
+    <div class="container cta-box" data-reveal>
+      <div>
+        <p class="eyebrow">Para estudios</p>
+        <h2 id="talleres-title" class="h2">¿Quieres un taller <span class="accent">en tu estudio</span>?</h2>
+        <p class="lead">
+          Imparto talleres de Rocket, Ashtanga, invertidas y biomecánica allí donde se me solicita. Hablemos del formato.
+        </p>
+      </div>
+      <a class="btn" href={contact.whatsapp('Hola José, me gustaría organizar un taller en nuestro estudio.')} target="_blank" rel="noopener">
+        Proponer un taller <Icon name="arrow" />
+      </a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .timetable { display: grid; gap: 2.5rem; }
+  @media (min-width: 960px) {
+    .timetable { grid-template-columns: 0.8fr 1.2fr; gap: clamp(3rem, 7vw, 7rem); }
+  }
+  .timetable__head { display: grid; gap: 1rem; align-content: start; }
+
+  .steps__head { display: grid; gap: 1rem; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 2.5rem;
+  }
+  .step { display: grid; gap: 0.75rem; padding-top: 1.5rem; border-top: 1px solid var(--line); align-content: start; }
+  .step__num {
+    font-family: var(--ff-display);
+    font-size: 3rem;
+    font-weight: 200;
+    font-style: italic;
+    line-height: 1;
+    color: var(--ember-soft);
+  }
+  .step p { color: var(--sand); }
+
+  .studio { display: grid; gap: 2rem; align-items: end; }
+  @media (min-width: 900px) { .studio { grid-template-columns: 1fr 1fr; } }
+  .studio > div:first-child { display: grid; gap: 1rem; }
+  .studio__info { display: grid; gap: 1.5rem; justify-items: start; }
+  .studio address {
+    display: flex;
+    gap: 1rem;
+    font-style: normal;
+    font-size: var(--fs-lg);
+    line-height: 1.5;
+    color: var(--sand);
+  }
+  .studio address :global(svg) { color: var(--ember); flex: none; margin-top: 0.25rem; }
+
+  .cta-box {
+    display: grid;
+    gap: 2rem;
+    align-items: end;
+    padding-block: clamp(2rem, 4vw, 3.5rem);
+    border-block: 1px solid var(--line);
+  }
+  @media (min-width: 900px) { .cta-box { grid-template-columns: 1fr auto; } }
+  .cta-box > div { display: grid; gap: 1rem; }
+</style>

@@ -1,0 +1,111 @@
+---
+import Icon from './Icon.astro';
+import { nav, contact, studio } from '../data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__top">
+      <div class="site-footer__intro">
+        <p class="site-footer__title">Practica <em>conmigo</em>.</p>
+        <p class="site-footer__text">Clases regulares de Ashtanga y Rocket en {studio.city}, talleres y retiros.</p>
+        <div class="actions">
+          <a class="btn" href={contact.whatsapp()} target="_blank" rel="noopener">
+            <Icon name="whatsapp" /> Escríbeme por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="site-footer__cols">
+        <div>
+          <h2 class="site-footer__heading">Navegación</h2>
+          <ul role="list">
+            <li><a href="/">Inicio</a></li>
+            {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+          </ul>
+        </div>
+        <div>
+          <h2 class="site-footer__heading">Contacto</h2>
+          <ul role="list">
+            <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>
+            <li><a href={`tel:${contact.phone}`}>{contact.phoneDisplay}</a></li>
+            <li><a href={contact.instagramUrl} target="_blank" rel="noopener">@{contact.instagram}</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="site-footer__heading">Estudio</h2>
+          <address>
+            {studio.name}<br />
+            {studio.street}<br />
+            {studio.postalCode} {studio.city}, {studio.region}
+          </address>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p>© {year} José Carnero</p>
+      <a href="/aviso-legal/">Aviso legal y privacidad</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ink-2);
+    border-top: 1px solid var(--line);
+    padding-block: clamp(3.5rem, 2rem + 5vw, 6rem) 2rem;
+    font-size: var(--fs-sm);
+  }
+  .site-footer__top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  @media (min-width: 900px) {
+    .site-footer__top { grid-template-columns: 1.1fr 1.4fr; gap: 4rem; }
+  }
+  .site-footer__title {
+    font-family: var(--ff-display);
+    font-size: var(--fs-2xl);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .site-footer__title em { color: var(--ember-soft); }
+  .site-footer__text { color: var(--muted); margin: 1rem 0 1.75rem; max-width: 36ch; }
+
+  .site-footer__cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2rem;
+  }
+  .site-footer__heading {
+    font-family: var(--ff-body);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .site-footer ul li + li { margin-top: 0.5rem; }
+  .site-footer a:not(.btn) { text-decoration: none; color: var(--sand); transition: color 0.3s var(--ease); overflow-wrap: anywhere; }
+  .site-footer a:not(.btn):hover { color: var(--paper); }
+  .site-footer address { font-style: normal; color: var(--sand); line-height: 1.7; }
+
+  .site-footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.04em;
+  }
+  .site-footer__bottom a { color: var(--muted); }
+</style>
