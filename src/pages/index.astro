@@ -2,19 +2,47 @@
 import { Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
-import Schedule from '../components/Schedule.astro';
 import EventCard from '../components/EventCard.astro';
-import { contact, credentials, studio } from '../data/site';
+import { studio } from '../data/site';
 import { getEvents } from '../lib/events';
 
 import heroImg from '../assets/photos/atardecer-guerrero.jpg';
 import ashtangaImg from '../assets/photos/pino.jpg';
 import rocketImg from '../assets/photos/equilibrio-brazos.jpg';
 import aboutImg from '../assets/photos/media-luna-invertida.jpg';
+import classesImg from '../assets/photos/postura-sentada.jpg';
+import eventsImg from '../assets/photos/apertura-cadera.jpg';
 import quoteImg from '../assets/photos/hanumanasana.jpg';
 
 const { upcoming } = await getEvents();
 const featured = upcoming[0];
+
+const sections = [
+  {
+    href: '/clases/',
+    title: 'Clases',
+    text: `Ashtanga cada semana en ${studio.name}. Horarios y cómo empezar.`,
+    cta: 'Ver horarios',
+    img: classesImg,
+    pos: '60% 50%',
+  },
+  {
+    href: '/eventos/',
+    title: 'Talleres y retiros',
+    text: 'Workshops, cursos y retiros para profundizar en la práctica.',
+    cta: 'Ver eventos',
+    img: eventsImg,
+    pos: '55% 50%',
+  },
+  {
+    href: '/sobre-mi/',
+    title: 'Sobre mí',
+    text: 'De bombero y artes marciales a profesor de Ashtanga y Rocket.',
+    cta: 'Conoce mi camino',
+    img: aboutImg,
+    pos: '50% 60%',
+  },
+];
 ---
 
 <Base>
@@ -60,14 +88,6 @@ const featured = upcoming[0];
           Una práctica basada en la <em>alineación</em>, el movimiento del <em>prana</em> a través de la respiración y la{" "}
           <em>biomecánica</em>, para que el yoga sea sostenible y te acompañe toda la vida.
         </p>
-        <ul role="list" class="credentials" data-reveal>
-          {credentials.map((c) => (
-            <li>
-              <span class="credentials__title">{c.title}</span>
-              <span class="credentials__detail">{c.detail}</span>
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   </section>
@@ -122,89 +142,46 @@ const featured = upcoming[0];
     </div>
   </section>
 
-  <!-- CLASES -->
-  <section class="section section--ink-2 classes" aria-labelledby="clases-title">
-    <div class="container classes__grid">
-      <div class="classes__intro" data-reveal>
-        <p class="eyebrow">Clases regulares</p>
-        <h2 id="clases-title" class="h2">Practica cada semana en <span class="accent">{studio.city}</span></h2>
-        <p class="lead">
-          Clases de Ashtanga en el estudio {studio.name}, por la mañana temprano o al final del día. Escríbeme y te
-          cuento cómo empezar.
-        </p>
-        <div class="actions">
-          <a class="btn" href={contact.whatsapp()} target="_blank" rel="noopener"><Icon name="whatsapp" /> Reservar clase</a>
-          <a class="btn btn--ghost" href="/clases/">Horarios y estudio</a>
-        </div>
+  <!-- PRÓXIMO EVENTO (sólo si hay fechas publicadas) -->
+  {featured && (
+    <section class="section section--ink-2" aria-labelledby="evento-title">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Próximo encuentro</p>
+          <h2 id="evento-title" class="sr-only">Próximo encuentro</h2>
+        </header>
+        <EventCard event={featured} variant="feature" />
       </div>
-      <div data-reveal style="--reveal-delay:.1s">
-        <Schedule />
-      </div>
-    </div>
-  </section>
+    </section>
+  )}
 
-  <!-- EVENTOS: sólo el próximo destacado; el archivo completo vive en /eventos -->
-  <section class="section events" aria-labelledby="eventos-title">
+  <!-- ÍNDICE: un vistazo a todo lo que hay en la web -->
+  <section class:list={['section explore', { 'section--ink-2': !featured }]} aria-labelledby="explore-title">
     <div class="container">
-      {featured ? (
-        <>
-          <header class="section-head section-head--row" data-reveal>
-            <div>
-              <p class="eyebrow">Talleres y retiros</p>
-              <h2 id="eventos-title" class="h2">Próximo encuentro</h2>
+      <header class="section-head" data-reveal>
+        <p class="eyebrow">Explora</p>
+        <h2 id="explore-title" class="h2">Clases, retiros <span class="accent">y mi camino</span></h2>
+      </header>
+      <ul role="list" class="explore__grid">
+        {sections.map((item, i) => (
+          <li class="explore__card" data-reveal style={`--reveal-delay:${i * 0.08}s`}>
+            <div class="explore__media media">
+              <Picture
+                src={item.img}
+                alt=""
+                formats={['avif', 'webp']}
+                widths={[400, 700, 1000]}
+                sizes="(min-width: 900px) 33vw, 100vw"
+                quality={82}
+                style={`object-position:${item.pos}`}
+              />
             </div>
-            <a class="link-arrow" href="/eventos/">Todos los eventos <Icon name="arrow" /></a>
-          </header>
-          <EventCard event={featured} variant="feature" />
-        </>
-      ) : (
-        <div class="events__band" data-reveal>
-          <div>
-            <p class="eyebrow">Talleres y retiros</p>
-            <h2 id="eventos-title" class="h2">Más allá de la <span class="accent">clase semanal</span></h2>
-            <p class="events__text">
-              Workshops, cursos y retiros para profundizar en la práctica. Las nuevas fechas se anuncian primero en
-              Instagram.
-            </p>
-          </div>
-          <div class="actions">
-            <a class="btn" href="/eventos/">Ver eventos <Icon name="arrow" /></a>
-            <a class="btn btn--ghost" href={contact.instagramUrl} target="_blank" rel="noopener">
-              <Icon name="instagram" /> @{contact.instagram}
-            </a>
-          </div>
-        </div>
-      )}
-    </div>
-  </section>
-
-  <!-- SOBRE MÍ -->
-  <section class="section section--paper about" aria-labelledby="about-title">
-    <div class="container about__grid">
-      <div class="about__media media" data-reveal>
-        <Picture
-          src={aboutImg}
-          alt="Jose Carnero en media luna invertida sobre la arena"
-          formats={['avif', 'webp']}
-          widths={[400, 700, 1000, 1400]}
-          sizes="(min-width: 900px) 50vw, 100vw"
-          quality={82}
-        />
-      </div>
-      <div class="about__text" data-reveal style="--reveal-delay:.1s">
-        <p class="eyebrow">Sobre mí</p>
-        <h2 id="about-title" class="h2">De las artes marciales <span class="accent">a la esterilla</span></h2>
-        <p>
-          Soy Jose Carnero, bombero de profesión y <em>sadhaka</em> o practicante de yoga como estilo de vida. Debido a
-          malas gestiones emocionales que se estaban expresando en mi cuerpo, decidí probar una clase de yoga, algo que
-          desde ese momento nunca más dejaría de practicar.
-        </p>
-        <p>
-          Después de practicar <em>Vinyasa</em> durante un tiempo y de haber probado <em>Yin Yoga</em> y <em>Hatha</em>,
-          encontré mi encaje en el <em>Ashtanga Vinyasa</em> y posteriormente en el <em>Rocket Vinyasa</em>.
-        </p>
-        <a class="link-arrow" href="/sobre-mi/">Conoce mi camino <Icon name="arrow" /></a>
-      </div>
+            <h3 class="h3"><a href={item.href}>{item.title}</a></h3>
+            <p>{item.text}</p>
+            <span class="link-arrow" aria-hidden="true">{item.cta} <Icon name="arrow" /></span>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
@@ -243,6 +220,10 @@ const featured = upcoming[0];
     height: 100%;
     object-fit: cover;
     object-position: 62% 50%;
+  }
+  /* En móvil sólo cabe una franja vertical de la foto: la centramos en la persona */
+  @media (max-width: 720px) {
+    .hero__media :global(img) { object-position: 56% 50%; }
   }
   @media (prefers-reduced-motion: no-preference) {
     .hero__media :global(img) { animation: hero-zoom 2.4s var(--ease) both; }
@@ -319,18 +300,6 @@ const featured = upcoming[0];
     max-width: 30ch;
   }
   .intro__statement em { color: #b5612a; }
-  .credentials {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-    gap: 1.5rem 2rem;
-    margin-top: clamp(2.5rem, 5vw, 4rem);
-    padding-top: 2rem;
-    border-top: 1px solid var(--line-ink);
-  }
-  .credentials li { display: grid; gap: 0.3rem; }
-  .credentials__title { font-family: var(--ff-display); font-size: var(--fs-lg); font-weight: 450; }
-  .credentials__detail { font-size: var(--fs-sm); color: var(--muted-ink); line-height: 1.5; }
-
   /* Section head ----------------------------------------------------- */
   .section-head { display: grid; gap: 1rem; margin-bottom: clamp(2.5rem, 5vw, 4.5rem); }
   .section-head--row {
@@ -360,36 +329,21 @@ const featured = upcoming[0];
   }
   .style-card p { color: var(--sand); max-width: 48ch; }
 
-  /* Clases -------------------------------------------------------------- */
-  .classes__grid { display: grid; gap: 3rem; }
-  @media (min-width: 960px) {
-    .classes__grid { grid-template-columns: 1fr 1.1fr; gap: clamp(3rem, 7vw, 8rem); align-items: start; }
-  }
-  .classes__intro { display: grid; gap: 1.25rem; justify-items: start; }
-  .classes__intro .actions { margin-top: 0.75rem; }
-
-  /* Eventos ------------------------------------------------------------- */
-  .events__band {
+  /* Índice ------------------------------------------------------------ */
+  .explore__grid {
     display: grid;
-    gap: 2rem;
-    align-items: end;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 3rem 2rem;
   }
-  @media (min-width: 900px) {
-    .events__band { grid-template-columns: 1fr auto; gap: 4rem; }
-  }
-  .events__band > div:first-child { display: grid; gap: 1rem; }
-  .events__text { font-size: var(--fs-lg); color: var(--sand); max-width: 48ch; }
-
-  /* Sobre mí ------------------------------------------------------------ */
-  .about__grid { display: grid; gap: 3rem; align-items: center; }
-  @media (min-width: 900px) {
-    .about__grid { grid-template-columns: 1fr 1fr; gap: clamp(3rem, 7vw, 7rem); }
-  }
-  .about__media { aspect-ratio: 4 / 5; }
-  .about__media :global(img) { object-position: 50% 60%; }
-  .about__text { display: grid; gap: 1.25rem; justify-items: start; }
-  .about__text p:not(.eyebrow) { color: var(--muted-ink); max-width: 52ch; }
-  .about__text .link-arrow { margin-top: 0.5rem; }
+  .explore__card { position: relative; display: grid; gap: 0.75rem; align-content: start; justify-items: start; }
+  .explore__media { aspect-ratio: 4 / 3; width: 100%; margin-bottom: 0.75rem; }
+  .explore__media :global(img) { transition: transform 1.2s var(--ease); }
+  .explore__card:hover .explore__media :global(img) { transform: scale(1.04); }
+  .explore__card h3 a { text-decoration: none; }
+  .explore__card h3 a::after { content: ''; position: absolute; inset: 0; }
+  .explore__card p { color: var(--sand); max-width: 40ch; }
+  .explore__card .link-arrow { margin-top: 0.25rem; }
+  .explore__card:hover .link-arrow :global(svg) { transform: translateX(4px); }
 
   /* Cita ---------------------------------------------------------------- */
   .quote {
