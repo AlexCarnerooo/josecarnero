@@ -52,6 +52,9 @@ html {
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
   scroll-padding-top: calc(var(--header-h) + 1rem);
+  /* Barra de scroll fina y oscura, a juego con el fondo (en vez de la gris clara de Windows) */
+  scrollbar-width: thin;
+  scrollbar-color: #4a4036 var(--ink);
 }
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
