@@ -4,10 +4,10 @@
  */
 
 export const site = {
-  name: 'José Carnero',
-  title: 'José Carnero · Ashtanga & Rocket Yoga en Ferrol',
+  name: 'Jose Carnero',
+  title: 'Jose Carnero · Ashtanga & Rocket Yoga en Ferrol',
   description:
-    'Clases de Ashtanga y Rocket Yoga en Ferrol con José Carnero. Práctica basada en la alineación, la respiración y la biomecánica. Talleres y retiros.',
+    'Clases de Ashtanga y Rocket Yoga en Ferrol con Jose Carnero. Práctica basada en la alineación, la respiración y la biomecánica. Talleres y retiros.',
   url: 'https://josecarnero.org',
   locale: 'es_ES',
 };
@@ -20,7 +20,7 @@ export const contact = {
   get instagramUrl() {
     return `https://www.instagram.com/${this.instagram}/`;
   },
-  whatsapp(text = 'Hola José, me gustaría información sobre las clases de yoga.') {
+  whatsapp(text = 'Hola Jose, me gustaría información sobre las clases de yoga.') {
     return `https://wa.me/${this.phone.replace('+', '')}?text=${encodeURIComponent(text)}`;
   },
 };

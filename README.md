@@ -1,6 +1,6 @@
 # josecarnero.org
 
-Web de José Carnero, profesor de Ashtanga y Rocket Yoga en Ferrol. Está hecha con [Astro](https://astro.build) y se publica en GitHub Pages.
+Web de Jose Carnero, profesor de Ashtanga y Rocket Yoga en Ferrol. Está hecha con [Astro](https://astro.build) y se publica en GitHub Pages.
 
 ## Desarrollo
 

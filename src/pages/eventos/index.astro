@@ -6,14 +6,14 @@ import Icon from '../../components/Icon.astro';
 import { contact } from '../../data/site';
 import { getEvents } from '../../lib/events';
 
-import heroImg from '../../assets/photos/equilibrio-brazos.webp';
+import heroImg from '../../assets/photos/equilibrio-brazos.jpg';
 
 const { upcoming, past } = await getEvents();
 ---
 
 <Base
   title="Talleres y retiros"
-  description="Workshops de Rocket Yoga, retiros y cursos con José Carnero en Galicia, Canarias y más allá."
+  description="Workshops de Rocket Yoga, retiros y cursos con Jose Carnero en Galicia, Canarias y más allá."
   image={heroImg}
 >
   <PageHero
@@ -44,7 +44,7 @@ const { upcoming, past } = await getEvents();
           </p>
           <div class="actions">
             <a class="btn" href={contact.instagramUrl} target="_blank" rel="noopener"><Icon name="instagram" /> Seguir en Instagram</a>
-            <a class="btn btn--ghost" href={contact.whatsapp('Hola José, avísame cuando haya un nuevo taller o retiro.')} target="_blank" rel="noopener">
+            <a class="btn btn--ghost" href={contact.whatsapp('Hola Jose, avísame cuando haya un nuevo taller o retiro.')} target="_blank" rel="noopener">
               <Icon name="whatsapp" /> Avísame
             </a>
           </div>
@@ -74,7 +74,8 @@ const { upcoming, past } = await getEvents();
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-    gap: 3.5rem 2rem;
+    gap: 0 2rem;
+    margin-bottom: -3.5rem;
   }
   .empty {
     display: grid;

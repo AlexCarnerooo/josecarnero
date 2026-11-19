@@ -8,6 +8,7 @@ city: Marruecos
 summary: Cinco días combinando yoga, surf y cultura marroquí, con el Gnaoua World Music Festival, talleres de cocina local y un cierre en Marrakech.
 cover: ../../assets/events/marruecos/cartel.webp
 coverAlt: Cartel del retiro de yoga, surf y cultura en Marruecos
+coverFit: poster
 links:
   - { label: 'Dossier del retiro (PDF)', url: '/assets/docs/retiro_marruecos.pdf' }
   - { label: 'Vídeo resumen', url: 'https://www.instagram.com/reel/DLifBL1tx2L/' }

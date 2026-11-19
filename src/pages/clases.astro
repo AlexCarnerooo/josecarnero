@@ -5,7 +5,7 @@ import Schedule from '../components/Schedule.astro';
 import Icon from '../components/Icon.astro';
 import { contact, studio, schedule, site } from '../data/site';
 
-import heroImg from '../assets/photos/hanumanasana.webp';
+import heroImg from '../assets/photos/hanumanasana.jpg';
 
 const steps = [
   { title: 'Escríbeme', text: 'Por WhatsApp o email. Cuéntame si ya practicas o si es tu primera vez.' },
@@ -43,7 +43,7 @@ const jsonLd = {
 
 <Base
   title="Clases y horarios"
-  description={`Clases de Ashtanga Yoga en Ferrol con José Carnero: lunes y miércoles por la mañana y por la noche en ${studio.name}, ${studio.street}.`}
+  description={`Clases de Ashtanga Yoga en Ferrol con Jose Carnero: lunes y miércoles por la mañana y por la noche en ${studio.name}, ${studio.street}.`}
   image={heroImg}
   jsonLd={jsonLd}
 >
@@ -52,7 +52,7 @@ const jsonLd = {
     title="Ashtanga en <em>Ferrol</em>"
     lead="Clases a primera hora de la mañana o para cerrar el día, con atención a la alineación y a la respiración."
     image={heroImg}
-    alt="José Carnero en hanumanasana sobre la arena al atardecer"
+    alt="Jose Carnero en hanumanasana sobre la arena al atardecer"
     position="50% 45%"
   >
     <div class="actions">
@@ -121,7 +121,7 @@ const jsonLd = {
           Imparto talleres de Rocket, Ashtanga, invertidas y biomecánica allí donde se me solicita. Hablemos del formato.
         </p>
       </div>
-      <a class="btn" href={contact.whatsapp('Hola José, me gustaría organizar un taller en nuestro estudio.')} target="_blank" rel="noopener">
+      <a class="btn" href={contact.whatsapp('Hola Jose, me gustaría organizar un taller en nuestro estudio.')} target="_blank" rel="noopener">
         Proponer un taller <Icon name="arrow" />
       </a>
     </div>

@@ -6,8 +6,8 @@ place: Living Yoga Tenerife
 city: Santa Cruz de Tenerife
 address: C/ Puerto Escondido, 3, 1C · Santa Cruz de Tenerife
 summary: Jornada intensiva de Rocket 1 y Rocket 2 multinivel con dos talleres de biomecánica aplicada a invertidas y extensiones de columna.
-cover: ../../assets/photos/equilibrio-brazos.webp
-coverAlt: José Carnero en un equilibrio sobre brazos en la playa
+cover: ../../assets/photos/equilibrio-brazos.jpg
+coverAlt: Jose Carnero en un equilibrio sobre brazos en la playa
 agenda:
   - day: Mañana · 09:30 – 13:30
     items:
@@ -31,7 +31,7 @@ contacts:
 
 ## Sobre el workshop
 
-Impartido por José Carnero, certificado **Nivel 2 de Rocket** y profesor de Ashtanga y Rocket. Veremos las secuencias de **Rocket 1** y **Rocket 2** junto con dos talleres de invertidas y extensiones de columna, asequibles para todos los niveles.
+Impartido por Jose Carnero, certificado **Nivel 2 de Rocket** y profesor de Ashtanga y Rocket. Veremos las secuencias de **Rocket 1** y **Rocket 2** junto con dos talleres de invertidas y extensiones de columna, asequibles para todos los niveles.
 
 - **Rocket 1** se centra en flexiones hacia adelante, fuerza de piernas, aperturas de cadera y alguna invertida.
 - **Rocket 2** pone el foco en extensiones de columna, con aperturas de cadera más profundas y más balances de brazos.

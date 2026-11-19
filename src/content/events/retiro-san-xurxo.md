@@ -7,8 +7,8 @@ place: Casa San Xurxo
 city: Ferrol · Galicia
 address: Rúa Arralba, 25A, 15592 Vila da Area, A Coruña
 summary: Tres días de práctica en la Costa Ártabra para trabajar alineación, respiración y biomecánica aplicada al movimiento, en un formato cercano y para grupos reducidos.
-cover: ../../assets/photos/apertura-cadera.webp
-coverAlt: José Carnero en una apertura de cadera sobre la arena al atardecer
+cover: ../../assets/photos/apertura-cadera.jpg
+coverAlt: Jose Carnero en una apertura de cadera sobre la arena al atardecer
 includes:
   - Prácticas de Rocket / Ashtanga Vinyasa
   - Pranayama
@@ -44,10 +44,10 @@ prices:
 gallery:
   - { src: ../../assets/events/sanxurxo/flyer-4.webp, alt: 'La casa: habitaciones, porche y exterior de Casa San Xurxo' }
   - { src: ../../assets/events/sanxurxo/flyer-5.webp, alt: 'El entorno: acantilados y playas de la Costa Ártabra' }
-  - { src: ../../assets/events/sanxurxo/flyer-2.webp, alt: 'Contenido del retiro y José ajustando una postura' }
+  - { src: ../../assets/events/sanxurxo/flyer-2.webp, alt: 'Contenido del retiro y Jose ajustando una postura' }
   - { src: ../../assets/events/sanxurxo/flyer-8.webp, alt: 'Señal de la Ruta San Xurxo – Costa Ártabra' }
 contacts:
-  - { label: 'José Carnero', value: '637 312 106', url: 'https://wa.me/34637312106' }
+  - { label: 'Jose Carnero', value: '637 312 106', url: 'https://wa.me/34637312106' }
   - { label: 'Casa San Xurxo', value: '606 75 94 93', url: 'tel:+34606759493' }
   - { label: 'Web de la casa', value: 'casasanxurxo.com', url: 'https://www.casasanxurxo.com' }
 ---

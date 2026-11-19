@@ -9,28 +9,50 @@ interface Props {
   image: ImageMetadata;
   alt: string;
   position?: string;
+  /** Carteles con texto: se muestran enteros junto al título en vez de recortados de fondo. */
+  poster?: boolean;
 }
-const { eyebrow, title, lead, image, alt, position = 'center' } = Astro.props;
+const { eyebrow, title, lead, image, alt, position = 'center', poster = false } = Astro.props;
 ---
 
-<section class="page-hero">
+<section class:list={['page-hero', { 'page-hero--poster': poster }]}>
   <div class="page-hero__media fill">
-    <Picture
-      src={image}
-      alt={alt}
-      formats={['avif', 'webp']}
-      layout="full-width"
-      loading="eager"
-      fetchpriority="high"
-      quality={70}
-      style={`object-position:${position}`}
-    />
+    {poster ? (
+      <Picture src={image} alt="" formats={['webp']} widths={[320]} sizes="320px" quality={40} />
+    ) : (
+      <Picture
+        src={image}
+        alt={alt}
+        formats={['avif', 'webp']}
+        layout="full-width"
+        loading="eager"
+        fetchpriority="high"
+        quality={82}
+        style={`object-position:${position}`}
+      />
+    )}
   </div>
-  <div class="container page-hero__content">
-    <p class="eyebrow">{eyebrow}</p>
-    <h1 class="page-hero__title" set:html={title} />
-    {lead && <p class="lead">{lead}</p>}
-    <slot />
+  <div class="container page-hero__inner">
+    <div class="page-hero__content">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1 class="page-hero__title" set:html={title} />
+      {lead && <p class="lead">{lead}</p>}
+      <slot />
+    </div>
+    {poster && (
+      <div class="page-hero__poster">
+        <Picture
+          src={image}
+          alt={alt}
+          formats={['avif', 'webp']}
+          widths={[480, 800, 1170]}
+          sizes="(min-width: 900px) 40vw, 100vw"
+          loading="eager"
+          fetchpriority="high"
+          quality={80}
+        />
+      </div>
+    )}
   </div>
 </section>
 
@@ -61,6 +83,22 @@ const { eyebrow, title, lead, image, alt, position = 'center' } = Astro.props;
     inset: 0;
     background:
       linear-gradient(to top, var(--ink) 0%, rgb(19 16 13 / 0.55) 40%, rgb(19 16 13 / 0.15) 70%, rgb(19 16 13 / 0.45) 100%);
+  }
+  .page-hero--poster .page-hero__media :global(img) { filter: blur(32px) brightness(0.45); transform: scale(1.15); }
+  .page-hero__inner { display: grid; gap: 2.5rem; }
+  .page-hero--poster .page-hero__inner { align-items: end; }
+  @media (min-width: 900px) {
+    .page-hero--poster .page-hero__inner { grid-template-columns: 1fr minmax(0, 0.8fr); gap: clamp(2.5rem, 5vw, 5rem); }
+  }
+  @media (max-width: 899px) {
+    .page-hero--poster .page-hero__poster { order: -1; }
+  }
+  .page-hero__poster :global(img) {
+    width: 100%;
+    max-width: 520px;
+    margin-inline: auto;
+    border-radius: var(--radius);
+    box-shadow: 0 24px 60px rgb(0 0 0 / 0.45);
   }
   .page-hero__content { display: grid; gap: 1.25rem; }
   .page-hero__title {

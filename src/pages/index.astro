@@ -7,15 +7,14 @@ import EventCard from '../components/EventCard.astro';
 import { contact, credentials, studio } from '../data/site';
 import { getEvents } from '../lib/events';
 
-import heroImg from '../assets/photos/atardecer-guerrero.webp';
-import ashtangaImg from '../assets/photos/pino.webp';
-import rocketImg from '../assets/photos/equilibrio-brazos.webp';
-import aboutImg from '../assets/photos/media-luna-invertida.webp';
-import quoteImg from '../assets/photos/hanumanasana.webp';
+import heroImg from '../assets/photos/atardecer-guerrero.jpg';
+import ashtangaImg from '../assets/photos/pino.jpg';
+import rocketImg from '../assets/photos/equilibrio-brazos.jpg';
+import aboutImg from '../assets/photos/media-luna-invertida.jpg';
+import quoteImg from '../assets/photos/hanumanasana.jpg';
 
-const { upcoming, past } = await getEvents();
+const { upcoming } = await getEvents();
 const featured = upcoming[0];
-const others = featured ? [...upcoming.slice(1), ...past].slice(0, 3) : past.slice(0, 3);
 ---
 
 <Base>
@@ -24,18 +23,18 @@ const others = featured ? [...upcoming.slice(1), ...past].slice(0, 3) : past.sli
     <div class="hero__media fill">
       <Picture
         src={heroImg}
-        alt="José Carnero en una postura de guerrero invertido frente al mar al atardecer"
+        alt="Jose Carnero en una postura de guerrero invertido frente al mar al atardecer"
         formats={['avif', 'webp']}
         layout="full-width"
         loading="eager"
         fetchpriority="high"
-        quality={68}
+        quality={82}
       />
     </div>
     <div class="container hero__content">
       <p class="eyebrow hero__eyebrow">Yoga en {studio.city} · Galicia</p>
       <h1 class="hero__title">
-        <span class="hero__line">José</span>
+        <span class="hero__line">Jose</span>
         <span class="hero__line hero__line--indent">Carnero</span>
       </h1>
       <div class="hero__foot">
@@ -90,7 +89,7 @@ const others = featured ? [...upcoming.slice(1), ...past].slice(0, 3) : past.sli
               formats={['avif', 'webp']}
               widths={[400, 700, 1000]}
               sizes="(min-width: 900px) 40vw, 100vw"
-              quality={70}
+              quality={82}
             />
           </div>
           <span class="style-card__num">01</span>
@@ -109,7 +108,7 @@ const others = featured ? [...upcoming.slice(1), ...past].slice(0, 3) : past.sli
               formats={['avif', 'webp']}
               widths={[400, 700, 1000]}
               sizes="(min-width: 900px) 40vw, 100vw"
-              quality={70}
+              quality={82}
             />
           </div>
           <span class="style-card__num">02</span>
@@ -144,34 +143,36 @@ const others = featured ? [...upcoming.slice(1), ...past].slice(0, 3) : past.sli
     </div>
   </section>
 
-  <!-- EVENTOS -->
+  <!-- EVENTOS: sólo el próximo destacado; el archivo completo vive en /eventos -->
   <section class="section events" aria-labelledby="eventos-title">
     <div class="container">
-      <header class="section-head section-head--row" data-reveal>
-        <div>
-          <p class="eyebrow">Talleres y retiros</p>
-          <h2 id="eventos-title" class="h2">{featured ? 'Próximos encuentros' : 'Experiencias compartidas'}</h2>
-        </div>
-        <a class="link-arrow" href="/eventos/">Todos los eventos <Icon name="arrow" /></a>
-      </header>
-
       {featured ? (
-        <EventCard event={featured} variant="feature" />
+        <>
+          <header class="section-head section-head--row" data-reveal>
+            <div>
+              <p class="eyebrow">Talleres y retiros</p>
+              <h2 id="eventos-title" class="h2">Próximo encuentro</h2>
+            </div>
+            <a class="link-arrow" href="/eventos/">Todos los eventos <Icon name="arrow" /></a>
+          </header>
+          <EventCard event={featured} variant="feature" />
+        </>
       ) : (
-        <div class="events__empty" data-reveal>
-          <p>
-            Ahora mismo no hay nuevas fechas publicadas. Los próximos talleres y retiros se anuncian primero en
-            Instagram.
-          </p>
-          <a class="btn btn--ghost" href={contact.instagramUrl} target="_blank" rel="noopener">
-            <Icon name="instagram" /> @{contact.instagram}
-          </a>
-        </div>
-      )}
-
-      {others.length > 0 && (
-        <div class="events__grid">
-          {others.map((e) => <EventCard event={e} />)}
+        <div class="events__band" data-reveal>
+          <div>
+            <p class="eyebrow">Talleres y retiros</p>
+            <h2 id="eventos-title" class="h2">Más allá de la <span class="accent">clase semanal</span></h2>
+            <p class="events__text">
+              Workshops, cursos y retiros para profundizar en la práctica. Las nuevas fechas se anuncian primero en
+              Instagram.
+            </p>
+          </div>
+          <div class="actions">
+            <a class="btn" href="/eventos/">Ver eventos <Icon name="arrow" /></a>
+            <a class="btn btn--ghost" href={contact.instagramUrl} target="_blank" rel="noopener">
+              <Icon name="instagram" /> @{contact.instagram}
+            </a>
+          </div>
         </div>
       )}
     </div>
@@ -183,18 +184,18 @@ const others = featured ? [...upcoming.slice(1), ...past].slice(0, 3) : past.sli
       <div class="about__media media" data-reveal>
         <Picture
           src={aboutImg}
-          alt="José Carnero en media luna invertida sobre la arena"
+          alt="Jose Carnero en media luna invertida sobre la arena"
           formats={['avif', 'webp']}
           widths={[400, 700, 1000, 1400]}
           sizes="(min-width: 900px) 50vw, 100vw"
-          quality={70}
+          quality={82}
         />
       </div>
       <div class="about__text" data-reveal style="--reveal-delay:.1s">
         <p class="eyebrow">Sobre mí</p>
         <h2 id="about-title" class="h2">De las artes marciales <span class="accent">a la esterilla</span></h2>
         <p>
-          Soy José Carnero, bombero de profesión y <em>sadhaka</em> o practicante de yoga como estilo de vida. Debido a
+          Soy Jose Carnero, bombero de profesión y <em>sadhaka</em> o practicante de yoga como estilo de vida. Debido a
           malas gestiones emocionales que se estaban expresando en mi cuerpo, decidí probar una clase de yoga, algo que
           desde ese momento nunca más dejaría de practicar.
         </p>
@@ -210,7 +211,7 @@ const others = featured ? [...upcoming.slice(1), ...past].slice(0, 3) : past.sli
   <!-- CITA -->
   <section class="quote" aria-label="Cita">
     <div class="quote__media fill">
-      <Picture src={quoteImg} alt="" formats={['avif', 'webp']} layout="full-width" quality={60} />
+      <Picture src={quoteImg} alt="" formats={['avif', 'webp']} layout="full-width" quality={82} />
     </div>
     <figure class="container quote__content" data-reveal>
       <blockquote>
@@ -368,22 +369,16 @@ const others = featured ? [...upcoming.slice(1), ...past].slice(0, 3) : past.sli
   .classes__intro .actions { margin-top: 0.75rem; }
 
   /* Eventos ------------------------------------------------------------- */
-  .events__grid {
+  .events__band {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-    gap: 3rem 2rem;
-    margin-top: clamp(3rem, 6vw, 5rem);
+    gap: 2rem;
+    align-items: end;
   }
-  .events__empty {
-    display: grid;
-    gap: 1.5rem;
-    justify-items: start;
-    padding: clamp(1.5rem, 4vw, 3rem);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    max-width: 52rem;
+  @media (min-width: 900px) {
+    .events__band { grid-template-columns: 1fr auto; gap: 4rem; }
   }
-  .events__empty p { font-size: var(--fs-lg); color: var(--sand); max-width: 48ch; }
+  .events__band > div:first-child { display: grid; gap: 1rem; }
+  .events__text { font-size: var(--fs-lg); color: var(--sand); max-width: 48ch; }
 
   /* Sobre mí ------------------------------------------------------------ */
   .about__grid { display: grid; gap: 3rem; align-items: center; }

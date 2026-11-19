@@ -20,6 +20,8 @@ const events = defineCollection({
       summary: z.string(),
       cover: image(),
       coverAlt: z.string(),
+      /** «poster» para carteles con texto: se muestran enteros, sin recortar. */
+      coverFit: z.enum(['photo', 'poster']).default('photo'),
       gallery: z.array(z.object({ src: image(), alt: z.string() })).default([]),
       agenda: z
         .array(z.object({ day: z.string(), items: z.array(z.object({ time: z.string(), text: z.string() })) }))

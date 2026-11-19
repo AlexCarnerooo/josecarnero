@@ -3,7 +3,7 @@ import { Font, getImage } from 'astro:assets';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site, contact } from '../data/site';
-import ogDefault from '../assets/photos/atardecer-guerrero.webp';
+import ogDefault from '../assets/photos/atardecer-guerrero.jpg';
 import type { ImageMetadata } from 'astro';
 import '../styles/global.css';
 
@@ -35,7 +35,7 @@ const personLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   '@id': `${site.url}/#jose`,
-  name: 'José Carnero',
+  name: 'Jose Carnero',
   jobTitle: 'Profesor de Ashtanga y Rocket Yoga',
   url: site.url,
   email: `mailto:${contact.email}`,

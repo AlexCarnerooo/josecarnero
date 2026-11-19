@@ -37,6 +37,8 @@ if (nav && toggle) {
     toggle.setAttribute('aria-expanded', String(open));
     if (label) label.textContent = open ? 'Cerrar menú' : 'Abrir menú';
     document.documentElement.style.overflow = open ? 'hidden' : '';
+    header?.classList.toggle('is-open', open);
+    if (open) header?.classList.remove('is-hidden');
     header?.classList.toggle('is-scrolled', open || window.scrollY > 24);
   };
   toggle.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));

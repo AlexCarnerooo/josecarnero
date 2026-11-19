@@ -15,13 +15,13 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.local(),
-      name: 'Fraunces',
+      name: 'Newsreader',
       cssVariable: '--font-display',
       fallbacks: ['Georgia', 'serif'],
       options: {
         variants: [
-          { src: [`${fsv}/fraunces/files/fraunces-latin-wght-normal.woff2`], weight: '100 900', style: 'normal' },
-          { src: [`${fsv}/fraunces/files/fraunces-latin-wght-italic.woff2`], weight: '100 900', style: 'italic' },
+          { src: [`${fsv}/newsreader/files/newsreader-latin-standard-normal.woff2`], weight: '200 800', style: 'normal' },
+          { src: [`${fsv}/newsreader/files/newsreader-latin-standard-italic.woff2`], weight: '200 800', style: 'italic' },
         ],
       },
     },
